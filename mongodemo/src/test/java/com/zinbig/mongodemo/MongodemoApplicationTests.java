@@ -8,6 +8,13 @@ class MongodemoApplicationTests {
 
 	@Test
 	void contextLoads() {
+
 	}
+
+	//@Test
+	//public void DBtest() {
+	//	User user = findByName("miguel");
+	//	assertEquals (user.getName(), "miguel");
+	//}
 
 }
