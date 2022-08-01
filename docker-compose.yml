@@ -6,7 +6,9 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - './postgres_data:/var/lib/postgresql/data'
+      - './postgres-volume:/var/lib/postgresql/data'
+      - './csv:/csv'
+      - ./init-postgre.sql:/docker-entrypoint-initdb.d/docker_postgres_init.sql
     environment:
       - DATABASE_HOST=127.0.0.1
       - POSTGRES_USER=root
@@ -27,5 +29,9 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
+    volumes:
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ./mongo-volume:/data/db
+      - './csv:/csv'
     ports:
       - '27017:27017'
