@@ -6,7 +6,8 @@ package com.zinbig.mongodemo.dtos;
 
 import org.springframework.stereotype.Component;
 
-import com.zinbig.mongodemo.model.User;
+//import com.zinbig.mongodemo.model.User;
+import com.zinbig.mongodemo.model.Accident;
 
 /**
  * Las instancias de esta clase se utilizan para crear DTOs en forma
@@ -20,12 +21,16 @@ public class DTOFactory {
 
 	/**
 	 * Crea un DTO que representará a un usuario.
-	 * 
+	 *
 	 * @param anUser es el usuario que debe ser representado.
 	 * @return un DTO con los datos básicos.
 	 */
-	public UserDTO createUserDTO(User anUser) {
+	/*public UserDTO createUserDTO(User anUser) {
 		return new UserDTO(anUser.getId(), anUser.getUsername(), anUser.getName(), anUser.version);
+	}*/
+
+	public AccidentDTO createAccidentDTO(Accident anAccident) {
+		return new AccidentDTO(anAccident.getID(), anAccident.getSource());
 	}
 
 }

@@ -6,12 +6,12 @@ package com.zinbig.mongodemo.resources;
 import javax.inject.Inject;
 
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zinbig.mongodemo.dtos.UserRequestDTO;
-import com.zinbig.mongodemo.services.IUserService;
+import com.zinbig.mongodemo.services.IAccidentService;
 
 /**
  * Esta clase presenta los diferentes "endpoints" de la api rest.
@@ -23,40 +23,27 @@ import com.zinbig.mongodemo.services.IUserService;
 public class DemoController {
 
 	/**
-	 * Es el servicio relacionado con los usuarios.
+	 * Es el servicio relacionado con los accidentes.
 	 */
 	@Inject
-	private IUserService usersService;
+	private IAccidentService accidentService;
 
-	/**
-	 * Endpoint para crear usuarios.
-	 * 
-	 * @param anUserRequestDTO dto que contiene la información del usuario a crear.
-	 * 
-	 */
-	@PostMapping("/api/users")
-	public void createUser(@RequestBody UserRequestDTO anUserRequestDTO) {
-		this.getUsersService().addUser(anUserRequestDTO.name, anUserRequestDTO.username, anUserRequestDTO.password);
+	@GetMapping("/api/HelloWorld")
+	public String HelloWorld() {
+		return "Hello World";
 	}
 
-	/**
-	 * Endpoint para agregar un nuevo número de teléfono.
-	 * 
-	 * @param anId    es el identificador del usuario.
-	 * @param aNumber es el número del teléfono.
-	 */
-	@PostMapping("/api/users/{id}/{number}")
-	public void addPhone(@PathVariable("id") String anId, @PathVariable("number") String aNumber) {
-		this.getUsersService().addPhone(anId, aNumber);
+	@GetMapping("/api/accidents/SourceMapQuest")
+	public String getAccidentWhitSourceMapQuest() {
+		return this.getAccidentService().findBySource("MapQuest").toString();
 	}
 
 	/**
 	 * Getter.
-	 * 
-	 * @return el servicio relacionado con los usuarios.
+	 *
+	 * @return el servicio relacionado con los accidentes.
 	 */
-	public IUserService getUsersService() {
-		return this.usersService;
+	public IAccidentService getAccidentService() {
+		return this.accidentService;
 	}
-
 }
