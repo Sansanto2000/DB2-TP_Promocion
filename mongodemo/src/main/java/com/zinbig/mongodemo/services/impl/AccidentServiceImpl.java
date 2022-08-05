@@ -12,7 +12,6 @@ import com.zinbig.mongodemo.dtos.DTOFactory;
 import com.zinbig.mongodemo.dtos.AccidentDTO;
 import com.zinbig.mongodemo.model.Accident;
 import com.zinbig.mongodemo.repositories.AccidentRepository;
-import com.zinbig.mongodemo.repositories.AccidentPostgreRepository;
 import com.zinbig.mongodemo.services.IAccidentService;
 
 /**
@@ -31,8 +30,6 @@ public class AccidentServiceImpl implements IAccidentService {
      */
     @Inject
     private AccidentRepository accidentRepository;
-    @Inject
-    private AccidentPostgreRepository accidentpostgreRepository;
 
     /**
      * Es el objeto encargado de crear los DTOs.

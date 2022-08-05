@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.zinbig.mongodemo.model.Accident;
 
 @Repository
-public interface AccidentRepository extends MongoRepository<Accident, String> {
+public interface AccidentRepository extends MongoRepository<Accident, String>, CustomAccidentRepository  {
 
     public Accident findBySource(String aSource);
 

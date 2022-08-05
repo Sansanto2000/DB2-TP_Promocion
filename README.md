@@ -8,7 +8,7 @@ docker-compose up -d
 *Levantar la app:*
 ```
 cd mongodemo
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 # DB2-TP_Promocion
