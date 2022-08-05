@@ -4,10 +4,16 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Table
+@Entity
 @Document
 public class Accident {
 
-    @Id private String id;
+    @Id
+    private String id;
 
     private String ID;
     private String Source;
