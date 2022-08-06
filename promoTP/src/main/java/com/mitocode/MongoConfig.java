@@ -45,7 +45,7 @@ public class MongoConfig {
 
 	//@Override
 	public Collection<String> getMappingBasePackages() {
-		return Collections.singleton("com.mitocode.repo.mongo");
+		return Collections.singleton("com.mitocode.model");
 	}
 
 }
