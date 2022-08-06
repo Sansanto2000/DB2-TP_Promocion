@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mitocode.model.postgre.Admin;
-import com.mitocode.model.mongo.User;
+import com.mitocode.model.admin.Admin;
+import com.mitocode.model.user.User;
 import com.mitocode.service.AdminService;
 import com.mitocode.service.UserService;
 
