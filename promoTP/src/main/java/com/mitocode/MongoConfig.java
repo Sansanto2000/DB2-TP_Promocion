@@ -21,7 +21,7 @@ import com.mongodb.client.MongoClients;
 import org.springframework.core.convert.converter.Converter;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.mitocode.repo.user")
+@EnableMongoRepositories(basePackages = "com.mitocode.repo.mongo")
 public class MongoConfig {
 	
 	@Autowired
@@ -45,7 +45,7 @@ public class MongoConfig {
 
 	//@Override
 	public Collection<String> getMappingBasePackages() {
-		return Collections.singleton("com.mitocode.repo.user");
+		return Collections.singleton("com.mitocode.repo.mongo");
 	}
 
 }

@@ -21,7 +21,7 @@ public class TestController {
 	private AdminService adminService; 
 	
 	@Autowired
-	private UserService userService; 
+	private UserService userService;
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/admin")
