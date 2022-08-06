@@ -1,4 +1,4 @@
-package com.mitocode.model.admin;
+package com.mitocode.model.postgre;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

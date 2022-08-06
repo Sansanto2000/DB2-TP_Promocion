@@ -44,7 +44,7 @@ public class PostgreSQLConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(adminDatasource());
-		em.setPackagesToScan("com.mitocode.model.admin");
+		em.setPackagesToScan("com.mitocode.model.postgre");
 		
 		HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);

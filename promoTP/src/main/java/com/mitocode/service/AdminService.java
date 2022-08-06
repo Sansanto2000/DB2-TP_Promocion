@@ -3,8 +3,8 @@ package com.mitocode.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mitocode.model.admin.Admin;
-import com.mitocode.repo.admin.IAdminRepo;
+import com.mitocode.model.postgre.Admin;
+import com.mitocode.repo.postgre.IAdminRepo;
 
 @Service
 public class AdminService{
