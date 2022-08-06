@@ -15,4 +15,5 @@ public class AdminService{
 	public void registrar(Admin t) {
 		repo.save(t);
 	}
+
 }

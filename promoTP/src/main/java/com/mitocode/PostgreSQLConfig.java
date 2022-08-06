@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(entityManagerFactoryRef = "adminEntityManagerFactory", transactionManagerRef = "adminTransactionManager", 
-basePackages = { "com.mitocode.repo.admin" })
+basePackages = { "com.mitocode.repo.postgre" })
 public class PostgreSQLConfig {
 
 	@Autowired
