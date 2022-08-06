@@ -22,7 +22,10 @@ public class TestController {
 	
 	@Autowired
 	private UserService userService;
-	
+
+	@Autowired
+	private AccidentService accidentService;
+
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/admin")
 	public void registrarAdmin(@RequestBody Admin admin) {
@@ -33,5 +36,11 @@ public class TestController {
 	@PostMapping("/user")
 	public void registrarUser(@RequestBody User usuario) {
 		userService.registrar(usuario);
+	}
+
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping("/accident")
+	public void registrarUser(@RequestBody Accident accident) {
+		accidentService.registrar(accident);
 	}
 }
