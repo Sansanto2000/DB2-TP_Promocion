@@ -34,15 +34,15 @@ Para el trabajo de promoción se deberá:
 - importar el dataset de accidentes de tránsito en cada una de las bases de datos 
 - implementar una aplicación utilizando la arquitectura de base presentada en la materia 
 - implementar las siguientes consultas apuntando a cada una de las bases de datos según su conveniencia: 
-  - (postgre) devolver todos los accidentes ocurridos entre 2 fechas dadas  
-  - (postgre) determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc) 
-  - (mongodb) dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio. 
-  - (mongodb) obtener la distancia promedio desde el inicio al fin del accidente
+  - RESUELTA: (postgre) devolver todos los accidentes ocurridos entre 2 fechas dadas
+  - IÑA: (postgre) determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc) 
+  - FRAN: (mongodb) dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio. 
+  - IÑA: (postgre) obtener la distancia promedio desde el inicio al fin del accidente
 
 Consultas para equipos de 3 personas: 
-  - (mongodb) devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados). 
-  - (mongodb) devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos. 
-  - (postgre) devolver el nombre de las 5 calles con más accidentes.
+  - FRAN: (mongodb) devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados). 
+  - SANTI: (mongodb) devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos. 
+  - SANTI: (postgre) devolver el nombre de las 5 calles con más accidentes.
 
 # Documento de resolucion
 
