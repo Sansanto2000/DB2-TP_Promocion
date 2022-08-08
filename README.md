@@ -1,15 +1,27 @@
+
 # Guia inicio
 
-*Levantar dbs en segundo plano:*
+*PREREQUISITO: Tener Docker Desktop corriendo*
+
+*Poner el archivo "US_Accidents_Dec19.csv" en la carpeta "/csv/"*
+
+*Posicionarse en la raiz del proyecto "/"*
+
+*Levantar las dbs en segundo plano:*
 ```
 docker-compose up -d
 ```
+*La primera vez que se levante se realizara una importacion en el postgre que durara entre 5-7 minutos*
+
+IMPORTANTE: Solo se hace para Postgre, en MongoDB hay que hacer el import manual, del csv desde el MongoDB Compas, para conectarce al mismo luego de ejecutar docker usar `mongodb://root:root@localhost:27017/?authMechanism=DEFAULT`, tambien solo es necesario la primera vez, para las siguiente veces que se levante el contenedor los datos ya van a quedar guardados*
 
 *Levantar la app:*
 ```
-cd mongodemo
+cd promoTP
 ./mvnw spring-boot:run
 ```
+
+*Con el POSTMAN se pueden ejecutar las querys*
 
 # DB2-TP_Promocion
 
