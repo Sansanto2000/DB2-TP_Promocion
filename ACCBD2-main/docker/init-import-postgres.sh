@@ -1,0 +1,58 @@
+#!/bin/bash
+
+set -e
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "accbd2" <<-EOSQL
+CREATE TABLE accidents (
+	id VARCHAR(10) NOT NULL,
+	source VARCHAR ( 256 ), 
+	tmc FLOAT,
+	severity SMALLINT , 
+	start_time TIMESTAMP,
+    end_time TIMESTAMP,
+    start_lat DECIMAL (8,6),
+	start_lng DECIMAL (9,6),
+	end_lat DECIMAL (8,6),
+	end_lng DECIMAL (9,6),
+	distance_mi FLOAT,
+	description TEXT,
+	number FLOAT,
+	street VARCHAR(256),
+	side CHAR,
+	city VARCHAR(256),
+	county VARCHAR(256),
+	state VARCHAR(256),
+	zipcode VARCHAR(10),
+	country VARCHAR(256),
+	timezone VARCHAR(256),
+	airport_code VARCHAR(256),
+	weather_timestamp VARCHAR(256),
+	temperature_f FLOAT,
+	wind_chill_f VARCHAR(256),
+	humidity VARCHAR(256),
+	pressure_in VARCHAR(256),
+	visibility_mi FLOAT,
+	wind_direction VARCHAR(256),
+	wind_speed_mph FLOAT,
+	precipitation_in FLOAT,
+	weather_condition VARCHAR(256),
+	amenity BOOLEAN,
+	bump BOOLEAN,
+	crossing BOOLEAN,
+	give_way BOOLEAN,
+	junction BOOLEAN,
+	no_exit BOOLEAN,
+	railway BOOLEAN,
+	roundabout BOOLEAN,
+	station BOOLEAN,
+	stop BOOLEAN,
+	traffic_calming BOOLEAN,
+	traffic_signal BOOLEAN,
+	turning_loop BOOLEAN,
+	sunrise_sunset VARCHAR(10),
+	civil_twilight VARCHAR(10),
+	nautical_twilight VARCHAR(10),
+	astronomical_twilight VARCHAR(10)
+);
+COPY accidents(id,source,tmc,severity,start_time,end_time,start_lat,start_lng,end_lat,end_lng,distance_mi,description,number,street,side,city,county,state,zipcode,country,timezone,airport_code,weather_timestamp,temperature_f,wind_chill_f,humidity,pressure_in,visibility_mi,wind_direction,wind_speed_mph,precipitation_in,weather_condition,amenity,bump,crossing,give_way,junction,no_exit,railway,roundabout,station,stop,traffic_calming,traffic_signal,turning_loop,sunrise_sunset,civil_twilight,nautical_twilight,astronomical_twilight) FROM '/tmp/US_Accidents_Dec19.csv' DELIMITER ',' CSV HEADER;
+EOSQL
