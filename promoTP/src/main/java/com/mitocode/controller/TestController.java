@@ -39,6 +39,7 @@ public class TestController {
 		Date date2 = new GregorianCalendar(2020, Calendar.FEBRUARY, 20).getTime();
 		System.out.println(accidentService.accidentsBetweenTwoDates(date1, date2));
 		return startDate; //falta agregar paginado y que devuelva un json bien formateado
+		//Tambien falta hacer que las fechas que usa sean las recibidas por parametro y no las que harcodeamos
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
