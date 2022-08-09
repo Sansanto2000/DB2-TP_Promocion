@@ -14,6 +14,6 @@ public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
     List<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate);
 
     //@Query(value = "select street, count(street) as total from accidents group by street order by total desc limit 5", nativeQuery = true)
-    @Query(value = "select a.street from accident a group by a.Street order by count(a.Street) desc", nativeQuery = true)
-    List<Accident> fiveStreetsWithMoreAccidents();
+    @Query(value = "select a.street from accident a group by a.Street order by count(a.street) desc", nativeQuery = true)
+    List<String> streetsWithMoreAccidents();
 }
