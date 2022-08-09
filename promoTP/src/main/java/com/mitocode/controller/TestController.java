@@ -52,7 +52,7 @@ public class TestController {
 	@GetMapping("/query7")
 	public String fiveStreetsWithMoreAccidents() {
 		//Comprobaciones de formato y tipo de date1 y date2
-		//System.out.println(accidentService.accidentsBetweenTwoDates());
+		System.out.println(accidentService.fiveStreetsWithMoreAccidents());
 		return "Query 7";
 	}
 }

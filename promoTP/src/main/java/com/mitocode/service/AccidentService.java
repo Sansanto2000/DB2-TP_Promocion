@@ -25,4 +25,8 @@ public class AccidentService{
 	public List<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate) {
 		return repoP.accidentsBetweenTwoDates(startDate, endDate);
 	}
+
+	public List<Accident> fiveStreetsWithMoreAccidents() {
+		return repoP.fiveStreetsWithMoreAccidents();
+	}
 }
