@@ -33,4 +33,27 @@ public class AccidentService{
 	public List<String> fiveStreetsWithMoreAccidents() {
 		return repoP.streetsWithMoreAccidents().subList(0, 5);
 	}
+	
+	public Accident conditionsMostCommons() {
+		//Implementar una clase Accidente con las condiciones mas comunes en cada campo
+	}
+	
+	public List<Accident> accidentsNearAPointAndARadius(Double[] point, int radius, int page) {
+		Pageable page = PageRequest.of(pageNumber, pageSize);
+		repoM.addLocationToAccidents();
+		return repoM.accidentsNearAPointInARadius(point, radius, page);
+	}
+	
+	public Float averageDistanceOfAccidentsFromBeginningToEnd() {
+		//Avg del campo distance
+	}
+	
+	public List<LocationWithAmount> fiveMostDangerousPoints(Double[] point, int radius){
+		//Las 5 locations mas peligrosos(que mas se repiten) dentro del area recibida por parametro
+	}
+	
+	public Float averageDistanceFromEveryAccidentToTheNearestTen(int page) {
+		//Sacar promedio de distancias entre un accidente y los 10 mas cercanos, para luego
+		//hacer un promedio de todos los promedios calculados anteriormente
+	}
 }

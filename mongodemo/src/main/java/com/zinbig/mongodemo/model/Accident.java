@@ -4,6 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.mongodb.client.model.geojson.Point;
+
 @Document
 public class Accident {
 
@@ -18,6 +20,7 @@ public class Accident {
     private String End_Time;
     private double Start_Lat;
     private double Start_Lng;
+    private Point Location;
     @Field("Distance(mi)")
     private double Distance;
     private String Description;

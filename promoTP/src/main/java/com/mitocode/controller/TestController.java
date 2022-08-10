@@ -49,7 +49,6 @@ public class TestController {
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
-	//(mongodb) Dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio.
 	//(mongodb) Obtener la distancia promedio desde el inicio al fin del accidente
 	//(mongodb) Devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados).
 	//(mongodb) Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
@@ -61,4 +60,16 @@ public class TestController {
 		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
 		return topFive;
 	}
+	
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/query3")
+	public Slice<Accident> accidentsNearAPointInARadius(
+			@RequestParam(value = "point", required=true) Double[] point,
+			@RequestParam(value = "radius", required=true) int radius,
+			@RequestParam(value = "pageNumber", required=true) int pageNumber,
+			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
+		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, page);
+		return accidents;
+	}
+	
 }

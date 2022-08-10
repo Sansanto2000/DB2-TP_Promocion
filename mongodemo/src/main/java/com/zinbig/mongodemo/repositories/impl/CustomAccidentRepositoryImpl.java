@@ -24,6 +24,8 @@ public class CustomAccidentRepositoryImpl implements CustomAccidentRepository {
     @Override
     public int getNumberOfAccidentsThatHasTheSameSource() {
         return 4;
+        
+    // "location:{$near:{$geometry:{type:'Point',coordinates:?0},$maxDistance: ?1,$minDistance:1}}}"
 
 //		Update update = new Update();
 //		update.set("rLiqFilterClassName", aFilterClassName);
