@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.mitocode.model.Accident;
 import com.mitocode.service.AccidentService;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 
 @RestController
@@ -34,10 +37,12 @@ public class TestController {
 	//(postgre) Devolver todos los accidentes ocurridos entre 2 fechas dadas
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query1")
-	public List<Accident> accidentsBetweenTwoDates(String startDate, String endDate) {
-		//Comprobaciones de formato y tipo de date1 y date2
-		Date date1 = new GregorianCalendar(2000, Calendar.FEBRUARY, 11).getTime();
-		Date date2 = new GregorianCalendar(2020, Calendar.FEBRUARY, 20).getTime();
+	public List<Accident> accidentsBetweenTwoDates(
+			@RequestParam(value = "startDate", required=true) String startDate,
+			@RequestParam(value = "endDate", required=true) String endDate) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date1 = dateFormat.parse(startDate);
+		Date date2 = dateFormat.parse(endDate);
 		List<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2);
 		System.out.println("Hubo " + accidents.size() + " accidentes entre " + startDate +" y "+ endDate);
 		return accidents; //falta agregar paginado
@@ -55,6 +60,6 @@ public class TestController {
 	@GetMapping("/query7")
 	public List<String> fiveStreetsWithMoreAccidents() {
 		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
-		return topFive; //falta agregar paginado
+		return topFive;
 	}
 }
