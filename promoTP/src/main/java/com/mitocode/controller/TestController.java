@@ -15,8 +15,6 @@ import com.mitocode.service.AccidentService;
 
 import java.util.List;
 import java.util.Date;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -46,7 +44,6 @@ public class TestController {
 		List<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2);
 		System.out.println("Hubo " + accidents.size() + " accidentes entre " + startDate +" y "+ endDate);
 		return accidents; //falta agregar paginado
-		//Tambien falta hacer que las fechas que usa sean las recibidas por parametro y no las que harcodeamos
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
