@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.mitocode.model.Accident;
 import com.mitocode.service.AccidentService;
 
+import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -33,12 +34,13 @@ public class TestController {
 	//(postgre) Devolver todos los accidentes ocurridos entre 2 fechas dadas
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query1")
-	public String accidentsBetweenTwoDates(String startDate, String endDate) {
+	public List<Accident> accidentsBetweenTwoDates(String startDate, String endDate) {
 		//Comprobaciones de formato y tipo de date1 y date2
 		Date date1 = new GregorianCalendar(2000, Calendar.FEBRUARY, 11).getTime();
 		Date date2 = new GregorianCalendar(2020, Calendar.FEBRUARY, 20).getTime();
-		System.out.println(accidentService.accidentsBetweenTwoDates(date1, date2));
-		return startDate; //falta agregar paginado y que devuelva un json bien formateado
+		List<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2);
+		System.out.println("Total accidents: " + accidents.size());
+		return accidents;
 		//Tambien falta hacer que las fechas que usa sean las recibidas por parametro y no las que harcodeamos
 	}
 
