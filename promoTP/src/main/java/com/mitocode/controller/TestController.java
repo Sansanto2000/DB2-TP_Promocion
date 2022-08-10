@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.Accident;
 import com.mitocode.service.AccidentService;
@@ -35,15 +36,16 @@ public class TestController {
 	//(postgre) Devolver todos los accidentes ocurridos entre 2 fechas dadas
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query1")
-	public List<Accident> accidentsBetweenTwoDates(
+	public Slice<Accident> accidentsBetweenTwoDates(
 			@RequestParam(value = "startDate", required=true) String startDate,
-			@RequestParam(value = "endDate", required=true) String endDate) throws ParseException {
+			@RequestParam(value = "endDate", required=true) String endDate,
+			@RequestParam(value = "pageNumber", required=true) int pageNumber,
+			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date1 = dateFormat.parse(startDate);
 		Date date2 = dateFormat.parse(endDate);
-		List<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2);
-		System.out.println("Hubo " + accidents.size() + " accidentes entre " + startDate +" y "+ endDate);
-		return accidents; //falta agregar paginado
+		Slice<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2, pageNumber, pageSize);
+		return accidents;
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)

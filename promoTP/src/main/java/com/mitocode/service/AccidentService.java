@@ -2,6 +2,9 @@ package com.mitocode.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.Accident;
 import com.mitocode.repo.mongo.IMongoAccidentRepo;
@@ -22,8 +25,9 @@ public class AccidentService{
 		repoP.save(t);
 	}
 
-	public List<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate) {
-		return repoP.accidentsBetweenTwoDates(startDate, endDate);
+	public Slice<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate, int pageNumber, int pageSize) {
+		Pageable page = PageRequest.of(pageNumber, pageSize);
+		return repoP.accidentsBetweenTwoDates(startDate, endDate, page);
 	}
 
 	public List<String> fiveStreetsWithMoreAccidents() {
