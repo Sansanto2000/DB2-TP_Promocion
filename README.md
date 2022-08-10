@@ -42,7 +42,7 @@ Para el trabajo de promoción se deberá:
 Consultas para equipos de 3 personas: 
   - FRAN: (mongodb) devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados). 
   - SANTI: (mongodb) devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos. 
-  - SANTI: (postgre) devolver el nombre de las 5 calles con más accidentes.
+  - SANTI(RESUELTA): (postgre) devolver el nombre de las 5 calles con más accidentes.
 
 # Documento de resolucion
 
