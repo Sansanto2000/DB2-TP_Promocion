@@ -39,8 +39,8 @@ public class TestController {
 		Date date1 = new GregorianCalendar(2000, Calendar.FEBRUARY, 11).getTime();
 		Date date2 = new GregorianCalendar(2020, Calendar.FEBRUARY, 20).getTime();
 		List<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2);
-		System.out.println("Total accidents: " + accidents.size());
-		return accidents;
+		System.out.println("Hubo " + accidents.size() + " accidentes entre " + startDate +" y "+ endDate);
+		return accidents; //falta agregar paginado
 		//Tambien falta hacer que las fechas que usa sean las recibidas por parametro y no las que harcodeamos
 	}
 
@@ -53,9 +53,9 @@ public class TestController {
 	//(postgre) Devolver el nombre de las 5 calles con más accidentes.
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query7")
-	public String fiveStreetsWithMoreAccidents() {
+	public List<String> fiveStreetsWithMoreAccidents() {
 		//Comprobaciones de formato y tipo de date1 y date2
-		System.out.println(accidentService.fiveStreetsWithMoreAccidents());
-		return "Query 7"; //falta agregar paginado y que devuelva un json bien formateado
+		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
+		return topFive; //falta agregar paginado
 	}
 }
