@@ -54,7 +54,6 @@ public class TestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query7")
 	public List<String> fiveStreetsWithMoreAccidents() {
-		//Comprobaciones de formato y tipo de date1 y date2
 		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
 		return topFive; //falta agregar paginado
 	}
