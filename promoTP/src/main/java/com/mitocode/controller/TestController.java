@@ -49,7 +49,21 @@ public class TestController {
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
-	//(mongodb) Obtener la distancia promedio desde el inicio al fin del accidente
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/query2")
+	public Accident mostCommonCondition(@RequestParam(value = "condition",required = true) String condition) {
+		return accidentService.mostCommonCondition()
+
+	}
+
+	//(postgre) Obtener la distancia promedio desde el inicio al fin del accidente
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/query4")
+	public Float averageDistanceOfAccidentsFromBeginningToEnd() {
+		return accidentService.averageDistanceOfAccidentsFromBeginningToEnd()
+
+	}
 	//(mongodb) Devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados).
 	//(mongodb) Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
 

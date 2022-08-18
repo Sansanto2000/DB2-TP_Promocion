@@ -18,4 +18,10 @@ public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
     //@Query(value = "select street, count(street) as total from accidents group by street order by total desc limit 5", nativeQuery = true)
     @Query(value = "select a.street from accident a group by a.Street order by count(a.street) desc", nativeQuery = true)
     List<String> streetsWithMoreAccidents();
+
+    @Query(value= "select avg(distance_mi) as average from accident", nativeQuery = true)
+    Float averageDistanceOfAccidentsFromBeginningToEnd();
+
+    @Query(value = "select ?1 from accidents where ?1 is not null  group by ?1 order by count(?1) desc limit 1", nativeQuery = true)
+    String mostCommonCondition(string condition);
 }
