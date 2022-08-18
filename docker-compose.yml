@@ -35,6 +35,38 @@ services:
       - './csv:/csv'
     ports:
       - '27017:27017'
+#  elasticsearch:
+#    container_name: elastic-container
+#    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.4
+#    environment:
+#      - xpack.security.enabled=false
+#      - "discovery.type=single-node"
+#    networks:
+#      - ek-net
+#    ports:
+#      - 9200:9200
+#    volumes:
+#      - elastic-volume:/usr/share/elasticsearch/data
+#  kibana:
+#    container_name: kibana-container
+#    image: docker.elastic.co/kibana/kibana:7.13.4
+#    environment:
+#      - ELASTICSEARCH_HOSTS=http://elastic-container:9200
+#    networks:
+#      - ek-net
+#    depends_on:
+#      - elasticsearch
+#    ports:
+#      - 5601:5601
+
+#volumes:
+#  elastic-volume:
+#    driver: local
+
+#networks:
+#  ek-net:
+#    driver: bridge
+
 #  app:
 #    depends_on:
 #      - postgres3306

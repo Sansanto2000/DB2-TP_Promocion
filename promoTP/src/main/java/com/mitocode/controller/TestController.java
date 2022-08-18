@@ -61,7 +61,7 @@ public class TestController {
 		return topFive;
 	}
 	
-	@ResponseStatus(HttpStatus.OK)
+	/*@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query3")
 	public Slice<Accident> accidentsNearAPointInARadius(
 			@RequestParam(value = "longitude", required = true) String longitude,
@@ -70,8 +70,8 @@ public class TestController {
 			@RequestParam(value = "pageNumber", required=true) int pageNumber,
 			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
 		Double[] point = { Double.parseDouble(longitude), Double.parseDouble(latitude) };
-		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, page);
+		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, pageNumber, pageSize);
 		return accidents;
-	}
+	}*/
 	
 }
