@@ -35,7 +35,7 @@ public class TestController {
 
 	//(postgre) Devolver todos los accidentes ocurridos entre 2 fechas dadas
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping("/query1")
+	@GetMapping("/query1") //Revisar que startDate siempre es retornado como null
 	public Slice<Accident> accidentsBetweenTwoDates(
 			@RequestParam(value = "startDate", required=true) String startDate,
 			@RequestParam(value = "endDate", required=true) String endDate,
@@ -49,21 +49,33 @@ public class TestController {
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
-
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping("/query2")
-	public Accident mostCommonCondition(@RequestParam(value = "condition",required = true) String condition) {
-		return accidentService.mostCommonCondition()
+	@GetMapping("/query2") //Reparar parseos
+	public Accident mostCommonCondition() {
+		return accidentService.mostCommonCondition();
+	}
 
+	//(mongodb) dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio.
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/query3") //Resolver por que no anda la query
+	public Slice<Accident> accidentsNearAPointInARadius(
+			@RequestParam(value = "longitude", required = true) String longitude,
+			@RequestParam(value = "latitude", required = true) String latitude,
+			@RequestParam(value = "radius", required=true) int radius,
+			@RequestParam(value = "pageNumber", required=true) int pageNumber,
+			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
+		Double[] point = { Double.parseDouble(longitude), Double.parseDouble(latitude) };
+		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, pageNumber, pageSize);
+		return accidents;
 	}
 
 	//(postgre) Obtener la distancia promedio desde el inicio al fin del accidente
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query4")
 	public Float averageDistanceOfAccidentsFromBeginningToEnd() {
-		return accidentService.averageDistanceOfAccidentsFromBeginningToEnd()
-
+		return accidentService.averageDistanceOfAccidentsFromBeginningToEnd();
 	}
+
 	//(mongodb) Devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados).
 	//(mongodb) Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
 
@@ -74,18 +86,5 @@ public class TestController {
 		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
 		return topFive;
 	}
-	
-	/*@ResponseStatus(HttpStatus.OK)
-	@GetMapping("/query3")
-	public Slice<Accident> accidentsNearAPointInARadius(
-			@RequestParam(value = "longitude", required = true) String longitude,
-            @RequestParam(value = "latitude", required = true) String latitude,
-			@RequestParam(value = "radius", required=true) int radius,
-			@RequestParam(value = "pageNumber", required=true) int pageNumber,
-			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
-		Double[] point = { Double.parseDouble(longitude), Double.parseDouble(latitude) };
-		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, pageNumber, pageSize);
-		return accidents;
-	}*/
 	
 }
