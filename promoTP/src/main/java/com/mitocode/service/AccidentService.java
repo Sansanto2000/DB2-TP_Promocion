@@ -12,6 +12,7 @@ import com.mitocode.repo.postgre.IPostgreAccidentRepo;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Date;
+//import java.sql.Date;
 import java.text.SimpleDateFormat;
 
 @Service
@@ -29,14 +30,15 @@ public class AccidentService{
 
 	public Slice<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate, int pageNumber, int pageSize) {
 		Pageable page = PageRequest.of(pageNumber, pageSize);
-		return repoP.accidentsBetweenTwoDates(startDate, endDate, page);
+		//return repoP.accidentsBetweenTwoDates(startDate, endDate, page);
+		return repoP.findByStartTimeBetween(startDate, endDate, page);
 	}
 
 	public List<String> fiveStreetsWithMoreAccidents() {
 		return repoP.streetsWithMoreAccidents().subList(0, 5);
 	}
 	
-	public Accident mostCommonCondition() {
+	/*public Accident mostCommonCondition() {
 		//Implementar una clase Accidente con las condiciones mas comunes en cada campo
 		Accident mostCommonConditionsAccident = new Accident();
 		System.out.println("-----------------------------------------------");
@@ -81,7 +83,7 @@ public class AccidentService{
 		mostCommonConditionsAccident.setWindSpeedMph(Float.parseFloat(repoP.mostCommonCondition("Wind_Speed(mph)")));
 		mostCommonConditionsAccident.setZipcode(repoP.mostCommonCondition("Zipcode"));
 		return mostCommonConditionsAccident;
-	}
+	}*/
 
 	@Transactional
 	public Slice<Accident> accidentsNearAPointAndARadius(Double[] point, int radius, int pageNumber, int pageSize) {

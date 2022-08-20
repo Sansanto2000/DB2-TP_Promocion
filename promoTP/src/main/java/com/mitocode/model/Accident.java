@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "accident")
 public class Accident {
@@ -20,9 +22,9 @@ public class Accident {
     @Field("Severity")
     private Integer severity;
     @Field("Start_Time")
-    private String startTime;
+    private Date startTime;
     @Field("End_Time")
-    private String endTime;
+    private Date endTime;
     @Field("Start_Lat")
     private Float startLat;
     @Field("Start_Lng")
@@ -115,7 +117,7 @@ public class Accident {
     public Accident(){
 
     }
-    public Accident(String id, String source, Float tmc, Integer severity, String startTime, String endTime, Float startLat, Float startLng, Float endLat, Float endLng, Float distanceMi, String description, Float number, String street, char side, String city, String county, String state, String zipcode, String country, String timezone, String airportCode, String weatherTimestamp, Float temperatureF, String windChillF, String humidity, String pressureIn, Float visibilityMi, String windDirection, Float windSpeedMph, Float precipitationIn, String weatherCondition, Boolean amenity, Boolean bump, Boolean crossing, Boolean giveWay, Boolean junction, Boolean noExit, Boolean railway, Boolean roundabout, Boolean station, Boolean stop, Boolean trafficCalming, Boolean trafficSignal, Boolean turningLoop, String sunriseSunset, String civilTwilight, String nauticalTwilight, String astronomicalTwilight) {
+    public Accident(String id, String source, Float tmc, Integer severity, Date startTime, Date endTime, Float startLat, Float startLng, Float endLat, Float endLng, Float distanceMi, String description, Float number, String street, char side, String city, String county, String state, String zipcode, String country, String timezone, String airportCode, String weatherTimestamp, Float temperatureF, String windChillF, String humidity, String pressureIn, Float visibilityMi, String windDirection, Float windSpeedMph, Float precipitationIn, String weatherCondition, Boolean amenity, Boolean bump, Boolean crossing, Boolean giveWay, Boolean junction, Boolean noExit, Boolean railway, Boolean roundabout, Boolean station, Boolean stop, Boolean trafficCalming, Boolean trafficSignal, Boolean turningLoop, String sunriseSunset, String civilTwilight, String nauticalTwilight, String astronomicalTwilight) {
         this.id = id;
         this.source = source;
         this.tmc = tmc;
@@ -199,19 +201,19 @@ public class Accident {
         this.severity = severity;
     }
 
-    public String getStartTime() {
+    public Date getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public String getEndTime() {
+    public Date getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(Date endTime) {
         this.endTime = endTime;
     }
 
