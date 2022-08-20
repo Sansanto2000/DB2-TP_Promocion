@@ -77,6 +77,17 @@ public class TestController {
 	}
 
 	//(mongodb) Devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados).
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/query5")
+    public List<LocationAndAmount> fiveMostDangerousPoints(
+            @RequestParam(required = true) String longitude,
+            @RequestParam(required = true) String latitude,
+            @RequestParam(required = true) int radius) throws ParseException {
+        Double[] point = { Double.parseDouble(longitude), Double.parseDouble(latitude) };
+        List<LocationAndAmount> points = this.accidentService.fiveMostDangerousPoints(point, radius);
+        return points;
+      }
+	
 	//(mongodb) Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
 
 	//(postgre) Devolver el nombre de las 5 calles con más accidentes.
@@ -86,5 +97,5 @@ public class TestController {
 		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
 		return topFive;
 	}
-	
+		
 }
