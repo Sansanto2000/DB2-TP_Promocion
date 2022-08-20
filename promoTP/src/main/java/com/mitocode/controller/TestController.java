@@ -16,6 +16,7 @@ import com.mitocode.service.AccidentService;
 
 import java.util.List;
 import java.util.Date;
+//import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -42,21 +43,23 @@ public class TestController {
 			@RequestParam(value = "pageNumber", required=true) int pageNumber,
 			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date1 = dateFormat.parse(startDate);
-		Date date2 = dateFormat.parse(endDate);
+		Date date1 = dateFormat.parse(startDate + "T00:00:00");
+		Date date2 = dateFormat.parse(endDate + "T00:00:00");
 		Slice<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2, pageNumber, pageSize);
+		//List<Accident> accidents = accidentService.accidentsBetweenTwoDates(startDate, endDate, pageNumber, pageSize);
+		//List<Accident> accidents = accidentService.accidentsBetweenTwoDates(startDate, endDate);
 		return accidents;
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
-	@ResponseStatus(HttpStatus.OK)
+	/*@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query2") //Reparar parseos
 	public Accident mostCommonCondition() {
 		return accidentService.mostCommonCondition();
-	}
+	}*/
 
 	//(mongodb) dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio.
-	@ResponseStatus(HttpStatus.OK)
+	/*@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query3") //Resolver por que no anda la query
 	public Slice<Accident> accidentsNearAPointInARadius(
 			@RequestParam(value = "longitude", required = true) String longitude,
@@ -67,7 +70,7 @@ public class TestController {
 		Double[] point = { Double.parseDouble(longitude), Double.parseDouble(latitude) };
 		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, pageNumber, pageSize);
 		return accidents;
-	}
+	}*/
 
 	//(postgre) Obtener la distancia promedio desde el inicio al fin del accidente
 	@ResponseStatus(HttpStatus.OK)

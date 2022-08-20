@@ -12,8 +12,11 @@ import java.util.Date;
 import java.util.List;
 
 public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
-    @Query(value = "select * from accident a where (a.start_Time is not null) AND (a.start_Time BETWEEN ?1 AND ?2)", nativeQuery = true)
-    Slice<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate, Pageable pageable);
+
+    //Este metodo comentado hace exactamente lo mismo que el de abajo echo con los nombres por defecto ofrecidos por JPA
+    //@Query(value = "select * from accident a where a.start_Time BETWEEN ?1 AND ?2", nativeQuery = true)
+    //Slice<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate, Pageable pageable);
+    Slice<Accident> findByStartTimeBetween(Date startDate, Date endDate, Pageable pageable);
 
     //@Query(value = "select street, count(street) as total from accidents group by street order by total desc limit 5", nativeQuery = true)
     @Query(value = "select a.street from accident a group by a.Street order by count(a.street) desc", nativeQuery = true)
