@@ -7,11 +7,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.Accident;
+import com.mitocode.model.LocationAndAmount;
 import com.mitocode.repo.mongo.IMongoAccidentRepo;
 import com.mitocode.repo.postgre.IPostgreAccidentRepo;
-import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.Date;
+import java.sql.Date;
 //import java.sql.Date;
 import java.text.SimpleDateFormat;
 
@@ -41,9 +41,9 @@ public class AccidentService{
 	/*public Accident mostCommonCondition() {
 		//Implementar una clase Accidente con las condiciones mas comunes en cada campo
 		Accident mostCommonConditionsAccident = new Accident();
-		System.out.println("-----------------------------------------------");
-		System.out.println(repoP.mostCommonConditionDistanceMi());
-		System.out.println("-----------------------------------------------");
+		//System.out.println("-----------------------------------------------");
+		//System.out.println(repoP.mostCommonConditionDistanceMi());
+		//System.out.println("-----------------------------------------------");
 		mostCommonConditionsAccident.setAmenity(Boolean.parseBoolean(repoP.mostCommonCondition("Amenity")));
 		mostCommonConditionsAccident.setAstronomicalTwilight(repoP.mostCommonCondition("Astronomical_Twilight"));
 		mostCommonConditionsAccident.setBump(Boolean.parseBoolean(repoP.mostCommonCondition("Bump")));
@@ -51,8 +51,8 @@ public class AccidentService{
 		mostCommonConditionsAccident.setCivilTwilight(repoP.mostCommonCondition("Civil_Twilight"));
 		mostCommonConditionsAccident.setCounty(repoP.mostCommonCondition("County"));
 		mostCommonConditionsAccident.setCrossing(Boolean.parseBoolean(repoP.mostCommonCondition("Crossing")));
-		mostCommonConditionsAccident.setDistanceMi(Float.parseFloat(repoP.mostCommonCondition("distanceMi")));
-		mostCommonConditionsAccident.setEndTime(repoP.mostCommonCondition("End_Time"));
+		mostCommonConditionsAccident.setDistanceMi(repoP.mostCommonConditionDistanceMi());
+		mostCommonConditionsAccident.setEndTime(repoP.mostCommonConditionDate("End_Time"));
 		mostCommonConditionsAccident.setGiveWay(Boolean.parseBoolean(repoP.mostCommonCondition("Give_Way")));
 		mostCommonConditionsAccident.setHumidity(repoP.mostCommonCondition("Humidity(%)"));
 		mostCommonConditionsAccident.setJunction(Boolean.parseBoolean(repoP.mostCommonCondition("Junction")));
@@ -65,7 +65,7 @@ public class AccidentService{
 		mostCommonConditionsAccident.setRoundabout(Boolean.parseBoolean(repoP.mostCommonCondition("Roundabout")));
 		mostCommonConditionsAccident.setSeverity(Integer.valueOf(repoP.mostCommonCondition("Severity")));
 		mostCommonConditionsAccident.setSide(repoP.mostCommonCondition("Side").charAt(0));
-		mostCommonConditionsAccident.setStartTime(repoP.mostCommonCondition("Start_Time"));
+		mostCommonConditionsAccident.setStartTime(repoP.mostCommonConditionDate("Start_Time"));
 		mostCommonConditionsAccident.setState(repoP.mostCommonCondition("State"));
 		mostCommonConditionsAccident.setStation(Boolean.parseBoolean(repoP.mostCommonCondition("Station")));
 		mostCommonConditionsAccident.setStop(Boolean.parseBoolean(repoP.mostCommonCondition("Stop")));
@@ -85,7 +85,6 @@ public class AccidentService{
 		return mostCommonConditionsAccident;
 	}*/
 
-	@Transactional
 	public Slice<Accident> accidentsNearAPointAndARadius(Double[] point, int radius, int pageNumber, int pageSize) {
 		Pageable page = PageRequest.of(pageNumber, pageSize);
 		return repoM.accidentsNearAPointInARadius(point, radius, page);

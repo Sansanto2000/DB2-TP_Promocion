@@ -8,14 +8,12 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
 
-    //Este metodo comentado hace exactamente lo mismo que el de abajo echo con los nombres por defecto ofrecidos por JPA
-    //@Query(value = "select * from accident a where a.start_Time BETWEEN ?1 AND ?2", nativeQuery = true)
-    //Slice<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate, Pageable pageable);
+    @Query(value = "select * from accident a where a.start_Time BETWEEN ?1 AND ?2", nativeQuery = true)
     Slice<Accident> findByStartTimeBetween(Date startDate, Date endDate, Pageable pageable);
 
     //@Query(value = "select street, count(street) as total from accidents group by street order by total desc limit 5", nativeQuery = true)
@@ -28,6 +26,9 @@ public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
     //@Query(value = "select distance_mi from accidents where distance_mi is not null group by distance_mi order by count(distance_mi) desc limit 1", nativeQuery = true)
     @Query(value = "select ?1 from accident where ?1 is not null group by ?1 order by count(?1) desc limit 1", nativeQuery = true)
     String mostCommonCondition(String condition);
+
+    @Query(value = "select ?1 from accident where ?1 is not null group by ?1 order by count(?1) desc limit 1", nativeQuery = true)
+    Date mostCommonConditionDate(String condition);
 
     @Query(value = "select distance_mi from accident where distance_mi is not null group by distance_mi order by count(distance_mi) desc limit 1", nativeQuery = true)
     Float mostCommonConditionDistanceMi();

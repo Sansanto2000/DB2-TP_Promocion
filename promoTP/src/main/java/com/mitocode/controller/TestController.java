@@ -12,11 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.Accident;
+import com.mitocode.model.LocationAndAmount;
 import com.mitocode.service.AccidentService;
 
 import java.util.List;
-import java.util.Date;
-//import java.sql.Date;
+//import java.util.Date;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -38,14 +39,14 @@ public class TestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query1") //Revisar que startDate siempre es retornado como null
 	public Slice<Accident> accidentsBetweenTwoDates(
-			@RequestParam(value = "startDate", required=true) String startDate,
-			@RequestParam(value = "endDate", required=true) String endDate,
+			@RequestParam(value = "startDate", required=true) Date startDate,
+			@RequestParam(value = "endDate", required=true) Date endDate,
 			@RequestParam(value = "pageNumber", required=true) int pageNumber,
 			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date date1 = dateFormat.parse(startDate + "T00:00:00");
-		Date date2 = dateFormat.parse(endDate + "T00:00:00");
-		Slice<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2, pageNumber, pageSize);
+		//Date date1 = dateFormat.parse(startDate + "T00:00:00");
+		//Date date2 = dateFormat.parse(endDate + "T00:00:00");
+		Slice<Accident> accidents = accidentService.accidentsBetweenTwoDates(startDate, endDate, pageNumber, pageSize);
 		return accidents;
 	}
 
@@ -57,18 +58,28 @@ public class TestController {
 	}*/
 
 	//(mongodb) dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio.
-	/*@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query3") //Resolver por que no anda la query
 	public Slice<Accident> accidentsNearAPointInARadius(
-			@RequestParam(value = "longitude", required = true) String longitude,
-			@RequestParam(value = "latitude", required = true) String latitude,
+			@RequestParam(value = "longitude", required = true) Double longitude,
+			@RequestParam(value = "latitude", required = true) Double latitude,
 			@RequestParam(value = "radius", required=true) int radius,
 			@RequestParam(value = "pageNumber", required=true) int pageNumber,
 			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
-		Double[] point = { Double.parseDouble(longitude), Double.parseDouble(latitude) };
+		Double[] point = { longitude, latitude };
 		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, pageNumber, pageSize);
+		System.out.println("-----------------------------------------------");
+		System.out.println("longitude: "+longitude);
+		System.out.println("latitude: "+latitude);
+		System.out.println("point: "+point[0]+","+point[1]);
+		System.out.println("radius: "+radius);
+		System.out.println("pageNumber: "+pageNumber);
+		System.out.println("pageSize: "+pageSize);
+		System.out.println(accidents.getContent());
+		//System.out.println(accidents);
+		System.out.println("-----------------------------------------------");
 		return accidents;
-	}*/
+	}
 
 	//(postgre) Obtener la distancia promedio desde el inicio al fin del accidente
 	@ResponseStatus(HttpStatus.OK)
