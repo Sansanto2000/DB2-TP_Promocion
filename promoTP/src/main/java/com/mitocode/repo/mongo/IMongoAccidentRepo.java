@@ -13,15 +13,16 @@ import java.util.List;
 
 @Repository
 public interface IMongoAccidentRepo extends MongoRepository<Accident, String> {
-
-	
-	//No se si la anotattions @Add es correcta
-	@Modifying
-	@Query("{$set: {location: { \"type\": \"Point\", \"coordinates\": [\"$Start_Lng\", \"$Start_Lat\"]}}}")
-	void addLocationToAccidents();
 	
 	@Query("{location:{$near:{$geometry:{type:'Point',coordinates:?0},$maxDistance: ?1,$minDistance:1}}}")
     Slice<Accident> accidentsNearAPointInARadius(Double[] point, int radius, Pageable pageable);
 	
-	
+	@Aggregation(pipeline = {
+            "{$geoNear: {near: { type: 'Point', coordinates: ?0 },distanceField: 'dist.calculated',maxDistance: ?1, spherical: true}}",
+            "{$group : {_id: '$location', amount: {$sum: 1}}}",
+            "{$sort: {amount:-1}}",
+            "{$limit : 5}",
+            "{$project: { '_id': 0, 'location':'$_id.coordinates', 'amount':'$amount'}}"
+    })
+    List<LocationAndAmount> fiveMostDangerousPoints(Double[] point, int radius);
 }

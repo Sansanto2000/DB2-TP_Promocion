@@ -88,7 +88,6 @@ public class AccidentService{
 	@Transactional
 	public Slice<Accident> accidentsNearAPointAndARadius(Double[] point, int radius, int pageNumber, int pageSize) {
 		Pageable page = PageRequest.of(pageNumber, pageSize);
-		repoM.addLocationToAccidents();
 		return repoM.accidentsNearAPointInARadius(point, radius, page);
 	}
 	
@@ -96,11 +95,11 @@ public class AccidentService{
 		//Avg del campo distance
 		return repoP.averageDistanceOfAccidentsFromBeginningToEnd();
 	}
-	/*
-	public List<String> fiveMostDangerousPoints(Double[] point, int radius){
-		//Las 5 locations mas peligrosos(que mas se repiten) dentro del area recibida por parametro
-	}
 	
+	public List<LocationAndAmount> fiveMostDangerousPoints(Double[] point, int radius){
+		return repoM.fiveMostDangerousPoints(point, radius);
+	}
+	/*
 	public Float averageDistanceFromEveryAccidentToTheNearestTen(int page) {
 		//Sacar promedio de distancias entre un accidente y los 10 mas cercanos, para luego
 		//hacer un promedio de todos los promedios calculados anteriormente
