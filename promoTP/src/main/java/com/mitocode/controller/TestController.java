@@ -30,7 +30,7 @@ public class TestController {
 	
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/accident")
-	public void registrarUser(@RequestBody Accident accident) {
+	public void registrarAccident(@RequestBody Accident accident) {
 		accidentService.registrar(accident);
 	}
 
@@ -46,8 +46,6 @@ public class TestController {
 		Date date1 = dateFormat.parse(startDate + "T00:00:00");
 		Date date2 = dateFormat.parse(endDate + "T00:00:00");
 		Slice<Accident> accidents = accidentService.accidentsBetweenTwoDates(date1, date2, pageNumber, pageSize);
-		//List<Accident> accidents = accidentService.accidentsBetweenTwoDates(startDate, endDate, pageNumber, pageSize);
-		//List<Accident> accidents = accidentService.accidentsBetweenTwoDates(startDate, endDate);
 		return accidents;
 	}
 
