@@ -37,53 +37,49 @@ public class AccidentService{
 	public List<String> fiveStreetsWithMoreAccidents() {
 		return repoP.streetsWithMoreAccidents().subList(0, 5);
 	}
-	
-	/*public Accident mostCommonCondition() {
-		//Implementar una clase Accidente con las condiciones mas comunes en cada campo
+
+	@Override
+	public Accident mostCommonConditions() {
 		Accident mostCommonConditionsAccident = new Accident();
-		//System.out.println("-----------------------------------------------");
-		//System.out.println(repoP.mostCommonConditionDistanceMi());
-		//System.out.println("-----------------------------------------------");
-		mostCommonConditionsAccident.setAmenity(Boolean.parseBoolean(repoP.mostCommonCondition("Amenity")));
-		mostCommonConditionsAccident.setAstronomicalTwilight(repoP.mostCommonCondition("Astronomical_Twilight"));
-		mostCommonConditionsAccident.setBump(Boolean.parseBoolean(repoP.mostCommonCondition("Bump")));
-		mostCommonConditionsAccident.setCity(repoP.mostCommonCondition("City"));
-		mostCommonConditionsAccident.setCivilTwilight(repoP.mostCommonCondition("Civil_Twilight"));
-		mostCommonConditionsAccident.setCounty(repoP.mostCommonCondition("County"));
-		mostCommonConditionsAccident.setCrossing(Boolean.parseBoolean(repoP.mostCommonCondition("Crossing")));
-		mostCommonConditionsAccident.setDistanceMi(repoP.mostCommonConditionDistanceMi());
-		mostCommonConditionsAccident.setEndTime(repoP.mostCommonConditionDate("End_Time"));
-		mostCommonConditionsAccident.setGiveWay(Boolean.parseBoolean(repoP.mostCommonCondition("Give_Way")));
-		mostCommonConditionsAccident.setHumidity(repoP.mostCommonCondition("Humidity(%)"));
-		mostCommonConditionsAccident.setJunction(Boolean.parseBoolean(repoP.mostCommonCondition("Junction")));
-		mostCommonConditionsAccident.setNoExit(Boolean.parseBoolean(repoP.mostCommonCondition("No_Exit")));
-		mostCommonConditionsAccident.setNauticalTwilight(repoP.mostCommonCondition("Nautical_Twilight"));
-		mostCommonConditionsAccident.setNumber(Float.parseFloat(repoP.mostCommonCondition("number")));
-		mostCommonConditionsAccident.setPrecipitationIn(Float.parseFloat(repoP.mostCommonCondition("Precipitation(In)")));
-		mostCommonConditionsAccident.setPressureIn(repoP.mostCommonCondition("Pressure(In)"));
-		mostCommonConditionsAccident.setRailway(Boolean.parseBoolean(repoP.mostCommonCondition("Railway")));
-		mostCommonConditionsAccident.setRoundabout(Boolean.parseBoolean(repoP.mostCommonCondition("Roundabout")));
-		mostCommonConditionsAccident.setSeverity(Integer.valueOf(repoP.mostCommonCondition("Severity")));
-		mostCommonConditionsAccident.setSide(repoP.mostCommonCondition("Side").charAt(0));
-		mostCommonConditionsAccident.setStartTime(repoP.mostCommonConditionDate("Start_Time"));
-		mostCommonConditionsAccident.setState(repoP.mostCommonCondition("State"));
-		mostCommonConditionsAccident.setStation(Boolean.parseBoolean(repoP.mostCommonCondition("Station")));
-		mostCommonConditionsAccident.setStop(Boolean.parseBoolean(repoP.mostCommonCondition("Stop")));
-		mostCommonConditionsAccident.setStreet(repoP.mostCommonCondition("Street"));
-		mostCommonConditionsAccident.setSunriseSunset(repoP.mostCommonCondition("Sunrise_Sunset"));
-		mostCommonConditionsAccident.setTemperatureF(Float.parseFloat(repoP.mostCommonCondition("Temperature(F)")));
-		mostCommonConditionsAccident.setTmc(Float.parseFloat(repoP.mostCommonCondition("TMC")));
-		mostCommonConditionsAccident.setTrafficCalming(Boolean.parseBoolean(repoP.mostCommonCondition("Traffic_Calming")));
-		mostCommonConditionsAccident.setTrafficSignal(Boolean.parseBoolean(repoP.mostCommonCondition("Traffic_Signal")));
-		mostCommonConditionsAccident.setTurningLoop(Boolean.parseBoolean(repoP.mostCommonCondition("Turning_Loop")));
-		mostCommonConditionsAccident.setVisibilityMi(Float.parseFloat(repoP.mostCommonCondition("Visibility(Mi)")));
-		mostCommonConditionsAccident.setWeatherCondition(repoP.mostCommonCondition("Weather_Condition"));
-		mostCommonConditionsAccident.setWindChillF(repoP.mostCommonCondition("Wind_Chill(F)"));
-		mostCommonConditionsAccident.setWindDirection(repoP.mostCommonCondition("Wind_Direction"));
-		mostCommonConditionsAccident.setWindSpeedMph(Float.parseFloat(repoP.mostCommonCondition("Wind_Speed(mph)")));
-		mostCommonConditionsAccident.setZipcode(repoP.mostCommonCondition("Zipcode"));
+		mostCommonConditionsAccident.setAmenity(this.accidentRepository.mostCommonConditionAmenity());
+		mostCommonConditionsAccident.setAstronomicalTwilight(this.accidentRepository.mostCommonConditionAstronomicalTwilight());
+		mostCommonConditionsAccident.setBump(this.accidentRepository.mostCommonConditionBump());
+		mostCommonConditionsAccident.setCity(this.accidentRepository.mostCommonConditionCity());
+		mostCommonConditionsAccident.setCivilTwilight(this.accidentRepository.mostCommonConditionCivilTwilight());
+		mostCommonConditionsAccident.setCounty(this.accidentRepository.mostCommonConditionCounty());
+		mostCommonConditionsAccident.setCrossing(this.accidentRepository.mostCommonConditionCrossing());
+		mostCommonConditionsAccident.setDistanceMi(this.accidentRepository.mostCommonConditionDistanceMi());
+		mostCommonConditionsAccident.setEndTime(this.accidentRepository.mostCommonConditionEndTime());
+		mostCommonConditionsAccident.setGiveWay(this.accidentRepository.mostCommonConditionGiveWay());
+		mostCommonConditionsAccident.setHumidity(this.accidentRepository.mostCommonConditionHumidity());
+		mostCommonConditionsAccident.setJunction(this.accidentRepository.mostCommonConditionJunction());
+		mostCommonConditionsAccident.setNoExit(this.accidentRepository.mostCommonConditionNoExit());
+		mostCommonConditionsAccident.setNauticalTwilight(this.accidentRepository.mostCommonConditionNuaticalTwilight());
+		mostCommonConditionsAccident.setNumber(this.accidentRepository.mostCommonConditionNumber());
+		mostCommonConditionsAccident.setPrecipitationIn(this.accidentRepository.mostCommonConditionPrecipitation());
+		mostCommonConditionsAccident.setPressureIn(this.accidentRepository.mostCommonConditionPressureIn());
+		mostCommonConditionsAccident.setRailway(this.accidentRepository.mostCommonConditionRailway());
+		mostCommonConditionsAccident.setRoundabout(this.accidentRepository.mostCommonConditionRoundabout());
+		mostCommonConditionsAccident.setSeverity(this.accidentRepository.mostCommonConditionSeverity());
+		mostCommonConditionsAccident.setSide(this.accidentRepository.mostCommonConditionSide());
+		mostCommonConditionsAccident.setStartTime(this.accidentRepository.mostCommonConditionStartTime());
+		mostCommonConditionsAccident.setState(this.accidentRepository.mostCommonConditionState());
+		mostCommonConditionsAccident.setStation(this.accidentRepository.mostCommonConditionStation());
+		mostCommonConditionsAccident.setStop(this.accidentRepository.mostCommonConditionStop());
+		mostCommonConditionsAccident.setStreet(this.accidentRepository.mostCommonConditionStreet());
+		mostCommonConditionsAccident.setSunriseSunset(this.accidentRepository.mostCommonConditionSunriseSunset());
+		mostCommonConditionsAccident.setTemperatureF(this.accidentRepository.mostCommonConditionTemperatureF());
+		mostCommonConditionsAccident.setTmc(this.accidentRepository.mostCommonConditionTmc());
+		mostCommonConditionsAccident.setTrafficCalming(this.accidentRepository.mostCommonConditionTrafficCalming());
+		mostCommonConditionsAccident.setTrafficSignal(this.accidentRepository.mostCommonConditionTrafficSignal());
+		mostCommonConditionsAccident.setTurningLoop(this.accidentRepository.mostCommonConditionTurningLoop());
+		mostCommonConditionsAccident.setVisibilityMi(this.accidentRepository.mostCommonConditionVisibilityMi());
+		mostCommonConditionsAccident.setWeatherCondition(this.accidentRepository.mostCommonConditionWeatherCondition());
+		mostCommonConditionsAccident.setWindChillF(this.accidentRepository.mostCommonConditionWindChillF());
+		mostCommonConditionsAccident.setWindDirection(this.accidentRepository.mostCommonConditionWindDirection());
+		mostCommonConditionsAccident.setWindSpeedMph(this.accidentRepository.mostCommonConditionWindSpeedMph());
+		mostCommonConditionsAccident.setZipcode(this.accidentRepository.mostCommonConditionZipcode());
 		return mostCommonConditionsAccident;
-	}*/
 
 	public Slice<Accident> accidentsNearAPointAndARadius(Double[] point, int radius, int pageNumber, int pageSize) {
 		Pageable page = PageRequest.of(pageNumber, pageSize);
