@@ -13,6 +13,7 @@ import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.Accident;
 import com.mitocode.model.LocationAndAmount;
+import com.mitocode.model.Conditions;
 import com.mitocode.service.AccidentService;
 
 import java.util.List;
@@ -51,11 +52,11 @@ public class TestController {
 	}
 
 	//(postgre) Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
-	/*@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query2") //Reparar parseos
-	public Accident mostCommonCondition() {
-		return accidentService.mostCommonCondition();
-	}*/
+	public Conditions mostCommonConditions() {
+		return accidentService.mostCommonConditions();
+	}
 
 	//(mongodb) dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio.
 	@ResponseStatus(HttpStatus.OK)
@@ -68,16 +69,6 @@ public class TestController {
 			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
 		Double[] point = { longitude, latitude };
 		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius, pageNumber, pageSize);
-		System.out.println("-----------------------------------------------");
-		System.out.println("longitude: "+longitude);
-		System.out.println("latitude: "+latitude);
-		System.out.println("point: "+point[0]+","+point[1]);
-		System.out.println("radius: "+radius);
-		System.out.println("pageNumber: "+pageNumber);
-		System.out.println("pageSize: "+pageSize);
-		System.out.println(accidents.getContent());
-		//System.out.println(accidents);
-		System.out.println("-----------------------------------------------");
 		return accidents;
 	}
 
@@ -101,6 +92,13 @@ public class TestController {
       }
 	
 	//(mongodb) Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/query6")
+	public Float avgDistanceBetweenTop10NearestAccidents() {
+		// A definir tipo de retorno
+		return 0;
+	}
+
 
 	//(postgre) Devolver el nombre de las 5 calles con más accidentes.
 	@ResponseStatus(HttpStatus.OK)

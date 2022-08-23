@@ -3,6 +3,7 @@ package com.mitocode.repo.postgre;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.mitocode.model.Accident;
+import com.mitocode.model.Conditions;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -38,6 +39,18 @@ public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
     @Query(value = "select extract(hour from end_time) from accident where end_time is not null group by extract(hour from end_time) order by count(extract(hour from end_time)) desc limit 1", nativeQuery = true)
     String mostCommonConditionEndTime();
 
+    @Query(value = "select start_lat from accident where start_lat is not null group by start_lat order by count(start_lat) desc limit 1", nativeQuery = true)
+    Float mostCommonConditionStartLat();
+
+    @Query(value = "select start_lng from accident where start_lng is not null group by start_lng order by count(start_lng) desc limit 1", nativeQuery = true)
+    Float mostCommonConditionStartLng();
+
+    @Query(value = "select end_lat from accident where end_lat is not null group by end_lat order by count(end_lat) desc limit 1", nativeQuery = true)
+    Float mostCommonConditionEndLat();
+
+    @Query(value = "select end_lng from accident where end_lng is not null group by end_lng order by count(end_lng) desc limit 1", nativeQuery = true)
+    Float mostCommonConditionEndLng();
+
     @Query(value = "select distance_mi from accident where distance_mi is not null group by distance_mi order by count(distance_mi) desc limit 1", nativeQuery = true)
     Float mostCommonConditionDistanceMi();
 
@@ -61,6 +74,15 @@ public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
 
     @Query(value = "select zipcode from accident where zipcode is not null group by zipcode order by count(zipcode) desc limit 1", nativeQuery = true)
     String mostCommonConditionZipcode();
+
+    @Query(value = "select country from accident where country is not null group by country order by count(country) desc limit 1", nativeQuery = true)
+    String mostCommonConditionCountry();
+    @Query(value = "select timezone from accident where timezone is not null group by timezone order by count(timezone) desc limit 1", nativeQuery = true)
+    String mostCommonConditionTimezone();
+    @Query(value = "select airport_code from accident where airport_code is not null group by airport_code order by count(airport_code) desc limit 1", nativeQuery = true)
+    String mostCommonConditionAirportCode();
+    @Query(value = "select weather_timestamp from accident where weather_timestamp is not null group by weather_timestamp order by count(weather_timestamp) desc limit 1", nativeQuery = true)
+    String mostCommonConditionWeatherTimestamp();
 
     @Query(value = "select temperature_f from accident where temperature_f is not null group by temperature_f order by count(temperature_f) desc limit 1", nativeQuery = true)
     Float mostCommonConditionTemperatureF();
