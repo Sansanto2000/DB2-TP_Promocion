@@ -104,9 +104,8 @@ public class AccidentService{
 	public List<LocationAndAmount> fiveMostDangerousPoints(Double[] point, int radius){
 		return repoM.fiveMostDangerousPoints(point, radius);
 	}
-	/*
-	public Float averageDistanceFromEveryAccidentToTheNearestTen(int page) {
-		//Sacar promedio de distancias entre un accidente y los 10 mas cercanos, para luego
-		//hacer un promedio de todos los promedios calculados anteriormente
-	}*/
+	
+	public List<AccidentWithDistance> accidentService.avgDistanceBetweenTop10NearestAccidents(){
+		return repoM.avgDistanceBetweenTop10NearestAccidents();
+	}
 }

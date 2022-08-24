@@ -94,9 +94,9 @@ public class TestController {
 	//(mongodb) Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/query6")
-	public Float avgDistanceBetweenTop10NearestAccidents() {
-		// A definir tipo de retorno
-		return 0;
+	public List<AccidentWithDistance> avgDistanceBetweenTop10NearestAccidents() {
+		List<AccidentWithDistance> average = this.accidentService.avgDistanceBetweenTop10NearestAccidents();
+		return average;
 	}
 
 
