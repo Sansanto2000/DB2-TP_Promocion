@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.Accident;
+import com.mitocode.model.AccidentWithDistance;
 import com.mitocode.model.LocationAndAmount;
 import com.mitocode.model.Conditions;
 import com.mitocode.repo.mongo.IMongoAccidentRepo;
@@ -105,7 +106,7 @@ public class AccidentService{
 		return repoM.fiveMostDangerousPoints(point, radius);
 	}
 	
-	public List<AccidentWithDistance> accidentService.avgDistanceBetweenTop10NearestAccidents(){
+	public List<AccidentWithDistance> avgDistanceBetweenTop10NearestAccidents(){
 		return repoM.avgDistanceBetweenTop10NearestAccidents();
 	}
 }

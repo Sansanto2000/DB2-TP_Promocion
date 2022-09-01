@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.Accident;
+import com.mitocode.model.AccidentWithDistance;
 import com.mitocode.model.LocationAndAmount;
 import com.mitocode.model.Conditions;
 import com.mitocode.service.AccidentService;

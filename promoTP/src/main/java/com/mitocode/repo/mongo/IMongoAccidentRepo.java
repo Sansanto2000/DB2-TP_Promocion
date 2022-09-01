@@ -1,7 +1,5 @@
 package com.mitocode.repo.mongo;
 
-import com.mitocode.model.Accident;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Aggregation;
@@ -12,6 +10,8 @@ import org.springframework.data.domain.Slice;
 
 import java.util.List;
 import com.mitocode.model.LocationAndAmount;
+import com.mitocode.model.Accident;
+import com.mitocode.model.AccidentWithDistance;
 
 @Repository
 public interface IMongoAccidentRepo extends MongoRepository<Accident, String> {
