@@ -5,11 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.elasticsearch.annotations.Document;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "accident")
+@Document(indexName = "accidents")
 public class Accident {
 
     @Id

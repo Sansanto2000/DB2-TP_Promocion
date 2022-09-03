@@ -1,0 +1,6 @@
+Correr desde consola:
+	desde el directorio raiz de kibana
+	
+	.\bin\kibana.bat
+	
+	Nota: tarda bastante...

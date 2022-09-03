@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Page;
 
 import com.mitocode.model.Accident;
 import com.mitocode.model.AccidentWithDistance;
@@ -12,6 +13,7 @@ import com.mitocode.model.LocationAndAmount;
 import com.mitocode.model.Conditions;
 import com.mitocode.repo.mongo.IMongoAccidentRepo;
 import com.mitocode.repo.postgre.IPostgreAccidentRepo;
+import com.mitocode.repo.elastic.IElasticAccidentRepo;
 import java.util.List;
 import java.sql.Date;
 //import java.sql.Date;
@@ -24,6 +26,13 @@ public class AccidentService{
 	private IMongoAccidentRepo repoM;
 	@Autowired
 	private IPostgreAccidentRepo repoP;
+	@Autowired
+	private IElasticAccidentRepo repoE;
+
+	public Page<Accident> findByCountry(String country) {
+		Pageable page = PageRequest.of(0, 100);
+		return repoE.findByCountry(country, page);
+	}
 
 	public void registrar(Accident t) {
 		repoM.save(t);

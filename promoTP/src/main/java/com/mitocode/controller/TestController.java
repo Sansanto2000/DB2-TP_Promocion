@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Page;
 
 import com.mitocode.model.Accident;
 import com.mitocode.model.AccidentWithDistance;
@@ -107,6 +108,13 @@ public class TestController {
 	public List<String> fiveStreetsWithMoreAccidents() {
 		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
 		return topFive;
+	}
+
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/elasticTest")
+	public Page<Accident> findAll(
+			@RequestParam(required = true) String country) throws ParseException {
+		return accidentService.findByCountry(country);
 	}
 		
 }
