@@ -62,7 +62,7 @@ public class TestController {
 
 	//(mongodb) dado un punto geográfico y un radio (expresado en kilómetros) devolver todos los accidentes ocurridos dentro del radio.
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping("/query3") //Resolver por que no anda la query
+	@GetMapping("/query3")
 	public Slice<Accident> accidentsNearAPointInARadius(
 			@RequestParam(value = "longitude", required = true) Double longitude,
 			@RequestParam(value = "latitude", required = true) Double latitude,
@@ -113,8 +113,12 @@ public class TestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/elasticTest")
 	public Page<Accident> findAll(
-			@RequestParam(required = true) String country) throws ParseException {
-		return accidentService.findByCountry(country);
+			@RequestParam(required = true) String country,
+			@RequestParam(required=true) int pageNumber,
+			@RequestParam(required=true) int pageSize) throws ParseException {
+		Page<Accident> accidents = accidentService.findByCountry(country, pageNumber, pageSize);
+		return accidentService.test(pageNumber, pageSize);
+		//return accidentService.findByCountry(country, pageNumber, pageSize);
 	}
 		
 }

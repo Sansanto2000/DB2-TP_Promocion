@@ -29,9 +29,14 @@ public class AccidentService{
 	@Autowired
 	private IElasticAccidentRepo repoE;
 
-	public Page<Accident> findByCountry(String country) {
-		Pageable page = PageRequest.of(0, 100);
+	public Page<Accident> findByCountry(String country, int pageNumber, int pageSize) {
+		Pageable page = PageRequest.of(pageNumber, pageSize);
 		return repoE.findByCountry(country, page);
+	}
+
+	public Page<Accident> test(int pageNumber, int pageSize) {
+		Pageable page = PageRequest.of(pageNumber, pageSize);
+		return repoE.test(page);
 	}
 
 	public void registrar(Accident t) {
