@@ -4,11 +4,12 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+import com.mitocode.model.persistence.Accident;
+
 import org.springframework.data.elasticsearch.annotations.Query;
 //import org.springframework.data.elasticsearch.repository.query.Query;
 //import org.springframework.data.elasticsearch.repository.Query;
-
-import com.mitocode.model.Accident;
 
 import java.util.List;
 

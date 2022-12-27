@@ -1,9 +1,0 @@
-2) 
- - select extract(hour from start_time), count(extract(hour from start_time)) as cant from accidents group by extract(hour from start_time) order by cant desc;
- - select campo, count(campo) as cant from accidents group by campo order by cant desc; 
-
-4)
- - select avg(distance_mi) as average from accidents;
-
-7)
- - select street, count(street) as "total" from accidents group by street order by total desc limit 5;

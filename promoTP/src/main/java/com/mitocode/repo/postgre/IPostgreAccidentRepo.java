@@ -2,8 +2,8 @@ package com.mitocode.repo.postgre;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.mitocode.model.Accident;
-import com.mitocode.model.Conditions;
+import com.mitocode.model.persistence.Accident;
+import com.mitocode.model.schema.ConditionsSchema;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,13 +17,11 @@ public interface IPostgreAccidentRepo extends JpaRepository<Accident, String>{
     @Query(value = "select * from accident a where a.start_Time BETWEEN ?1 AND ?2", nativeQuery = true)
     Slice<Accident> findByStartTimeBetween(Date startDate, Date endDate, Pageable pageable);
 
-    //@Query(value = "select street, count(street) as total from accidents group by street order by total desc limit 5", nativeQuery = true)
-    @Query(value = "select a.street from accident a group by a.Street order by count(a.street) desc", nativeQuery = true)
-    List<String> streetsWithMoreAccidents();
-
     @Query(value= "select avg(distance_mi) as average from accident", nativeQuery = true)
     Float averageDistanceOfAccidentsFromBeginningToEnd();
-
+    
+    @Query(value = "select a.street from accident a group by a.Street order by count(a.street) desc limit 5", nativeQuery = true)
+    List<String> streetsWithMoreAccidents();
 
     //querys para mostCommonCondition
 
