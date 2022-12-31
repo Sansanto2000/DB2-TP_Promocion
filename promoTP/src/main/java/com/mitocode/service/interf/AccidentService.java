@@ -4,8 +4,6 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
 import com.mitocode.model.persistence.Accident;
@@ -25,11 +23,9 @@ public interface AccidentService {
 	
 	public List<LocationAndAmountSchema> fiveMostDangerousPoints(Double[] point, int radius);
 	
-	public List<AccidentWithDistanceSchema> avgDistanceBetweenTop10NearestAccidents();
+	public Slice<AccidentWithDistanceSchema> allAvgDistanceBetweenTop10NearestAccidents(int pageNumber, int pageSize);
 	
 	public List<String> fiveStreetsWithMoreAccidents();
-	
-	
 	
 	// Luego Borrar
 	public void registrar(Accident t);

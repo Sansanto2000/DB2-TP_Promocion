@@ -1,27 +1,28 @@
 package com.mitocode.model.schema;
 
 public class AccidentWithDistanceSchema {
+	
     private String id;
-    private Double distance;
+    private Double top_10_avg_distance;
 
     public AccidentWithDistanceSchema() {
     }
 
-    public AccidentWithDistanceSchema(String id, Double distance) {
+    public AccidentWithDistanceSchema(String id, Double top_10_avg_distance) {
         this.id = id;
-        this.distance = distance;
+        this.top_10_avg_distance = top_10_avg_distance;
     }
 
     public String getId() {
         return id;
     }
 
-    public Double getDistance() {
-        return distance;
+    public Double getTop_10_avg_distance() {
+        return top_10_avg_distance;
     }
 
-    public void setDistance(Double distance) {
-        this.distance = distance;
+    public void setDistance(Double top_10_avg_distance) {
+        this.top_10_avg_distance = top_10_avg_distance;
     }
 
     public void setId(String id) {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.SliceImpl;
 import org.springframework.data.domain.Page;
 
 import com.mitocode.model.persistence.Accident;
@@ -15,10 +16,10 @@ import com.mitocode.repo.mongo.IMongoAccidentRepo;
 import com.mitocode.repo.postgre.IPostgreAccidentRepo;
 import com.mitocode.service.interf.AccidentService;
 import com.mitocode.repo.elastic.IElasticAccidentRepo;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.sql.Date;
-//import java.sql.Date;
-import java.text.SimpleDateFormat;
 
 @Service
 public class AccidentServiceImpl implements AccidentService{
@@ -116,8 +117,15 @@ public class AccidentServiceImpl implements AccidentService{
 		return repoM.fiveMostDangerousPoints(point, radius);
 	}
 	
-	public List<AccidentWithDistanceSchema> avgDistanceBetweenTop10NearestAccidents(){
-		return repoM.avgDistanceBetweenTop10NearestAccidents();
+	public Slice<AccidentWithDistanceSchema> allAvgDistanceBetweenTop10NearestAccidents(int pageNumber, int pageSize){
+		Pageable page = PageRequest.of(pageNumber, pageSize);
+		List<AccidentWithDistanceSchema> list = new ArrayList<AccidentWithDistanceSchema>(); 
+		Slice<Accident> accidents = repoM.findAll(page);
+		for (Accident a: accidents) {
+			Double[] l = {Double.parseDouble(a.getStartLat().toString()), Double.parseDouble(a.getStartLng().toString())};
+			list.add(repoM.allAvgDistanceBetweenTop10NearestAccidents(a.getId(), l).get(0));
+		}
+		return new SliceImpl<AccidentWithDistanceSchema>(list, page, accidents.hasNext());	
 	}
 	
 	public List<String> fiveStreetsWithMoreAccidents() {

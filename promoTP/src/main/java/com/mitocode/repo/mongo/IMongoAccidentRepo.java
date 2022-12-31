@@ -20,7 +20,7 @@ public interface IMongoAccidentRepo extends MongoRepository<Accident, String> {
     Slice<Accident> accidentsNearAPointInARadius(Double[] point, int radius, Pageable pageable);
 	
 	@Aggregation(pipeline = {
-            "{$geoNear: {near: { type: 'Point', coordinates: ?0 },distanceField: 'dist.calculated',maxDistance: ?1, spherical: true}}",
+            "{$geoNear: {near: { type: 'Point', coordinates: ?0 },distanceField: 'dist.calculated', maxDistance: ?1, spherical: true}}",
             "{$group : {_id: '$location', amount: {$sum: 1}}}",
             "{$sort: {amount:-1}}",
             "{$limit : 5}",
@@ -28,23 +28,13 @@ public interface IMongoAccidentRepo extends MongoRepository<Accident, String> {
     })
     List<LocationAndAmountSchema> fiveMostDangerousPoints(Double[] point, int radius);
 	
-	// Esta consulta nos funciona en consola pero no conseguimos que retorne valor
-    // valido para 'distancia' a traves de la API.
-    // La causa es seguramente que como se esta usando el .map, se esta devolviendo
-    // un arreglo y no un cursor como en las otras consultas.
-    @Query("{}.map(function(doc){" +
-                "return db.accident.aggregate([{" +
-                    "$geoNear: {" +
-                        "near: {" +
-                            "type: 'Point', coordinates: [doc.Start_Lng, doc.Start_Lat]" +
-                        "}, " +
-                        "distanceField: 'distance', " +
-                        "spherical: true" +
-                    "}, " +
-                    "{$limit:10}, " +
-                    "{$group: {_id:null, distance:{$avg:'$distance'}}}" +
-                "}," +
-                "{$set: {_id: doc._id}}]).toArray()[0];" +
-            "})")
-    List<AccidentWithDistanceSchema> avgDistanceBetweenTop10NearestAccidents();
+    @Aggregation(pipeline = {
+            "{ $geoNear: { near: { type: 'Point', coordinates: ?1 }, distanceField: 'distance', spherical: true } }",
+            "{ $match: { _id: { $not: { $eq: '?0' } } } }",
+            "{ $sort : { distance : 1 } }",
+            "{ $limit: 10 }",
+            "{ $group: { _id: null, top_10_avg_distance: {$avg : '$distance' } } }",
+            "{ $set: { _id: '?0' } }"        
+    })
+    List<AccidentWithDistanceSchema> allAvgDistanceBetweenTop10NearestAccidents(String id, Double[] point);
 }

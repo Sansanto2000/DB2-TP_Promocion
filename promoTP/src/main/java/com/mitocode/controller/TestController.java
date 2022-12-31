@@ -77,7 +77,6 @@ public class TestController {
 		return accidentService.averageDistanceOfAccidentsFromBeginningToEnd();
 	}
 
-	// REARMAR, SOLO RECIBE EL RADIO
 	// Devolver los 5 puntos más peligrosos (definiendo un determinado radio y utilizando los datos de los accidentes registrados).
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/fiveMostDangerousPoints")
@@ -90,12 +89,13 @@ public class TestController {
         return points;
       }
 	
-	// REARMAR, La distancia devuelta por cada accidente siempre esta siendo null.
-	//(mongodb) Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
+	// Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping("/avgDistanceBetweenTop10NearestAccidents")
-	public List<AccidentWithDistanceSchema> avgDistanceBetweenTop10NearestAccidents() {
-		List<AccidentWithDistanceSchema> average = this.accidentService.avgDistanceBetweenTop10NearestAccidents();
+	@GetMapping("/allAvgDistanceBetweenTop10NearestAccidents")
+	public Slice<AccidentWithDistanceSchema> avgDistanceBetweenTop10NearestAccidents(
+			@RequestParam(value = "pageNumber", required=true) int pageNumber,
+			@RequestParam(value = "pageSize", required=true) int pageSize) {
+		Slice<AccidentWithDistanceSchema> average = this.accidentService.allAvgDistanceBetweenTop10NearestAccidents(pageNumber, pageSize);
 		return average;
 	}
 
@@ -114,7 +114,7 @@ public class TestController {
 			@RequestParam(required = true) String country,
 			@RequestParam(required=true) int pageNumber,
 			@RequestParam(required=true) int pageSize) throws ParseException {
-		Page<Accident> accidents = accidentService.findByCountry(country, pageNumber, pageSize);
+		//Page<Accident> accidents = accidentService.findByCountry(country, pageNumber, pageSize);
 		return accidentService.test(pageNumber, pageSize);
 		//return accidentService.findByCountry(country, pageNumber, pageSize);
 	}
