@@ -13,23 +13,25 @@ import com.mitocode.model.schema.LocationAndAmountSchema;
 
 public interface AccidentService {
 	
-	public Slice<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate, int pageNumber, int pageSize);
+	public Page<Accident> accidentsBetweenTwoDates(Date startDate, Date endDate, int pageNumber, int pageSize);
+	
+	public Page<Accident> accidentsBetweenTwoDatesElasticVersion(Date startDate, Date endDate, int pageNumber, int pageSize);
 
 	public ConditionsSchema mostCommonConditions();
 	
-	public Slice<Accident> accidentsNearAPointAndARadius(Double[] point, int radius, int pageNumber, int pageSize);
+	public Slice<Accident> accidentsNearAPointAndARadius(Double lat, Double lng, int radius, int pageNumber, int pageSize);
+	
+	public Page<Accident> accidentsNearAPointAndARadiusElasticVersion(Double lat, Double lng, int radius, int pageNumber, int pageSize);
 	
 	public Float averageDistanceOfAccidentsFromBeginningToEnd();
 	
-	public List<LocationAndAmountSchema> fiveMostDangerousPoints(Double[] point, int radius);
+	public List<LocationAndAmountSchema> fiveMostDangerousPoints(Double lat, Double lng, int radius);
 	
-	public Slice<AccidentWithDistanceSchema> allAvgDistanceBetweenTop10NearestAccidents(int pageNumber, int pageSize);
+	public Page<AccidentWithDistanceSchema> allAvgDistanceBetweenTop10NearestAccidents(int pageNumber, int pageSize);
 	
 	public List<String> fiveStreetsWithMoreAccidents();
 	
-	// Luego Borrar
+	// Extra
 	public void registrar(Accident t);
-	public Page<Accident> test(int pageNumber, int pageSize);
-	public Page<Accident> findByCountry(String country, int pageNumber, int pageSize);
 
 }

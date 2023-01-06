@@ -14,10 +14,10 @@ import com.mitocode.model.schema.AccidentWithDistanceSchema;
 import com.mitocode.model.schema.ConditionsSchema;
 import com.mitocode.model.schema.LocationAndAmountSchema;
 import com.mitocode.service.interf.AccidentService;
+import com.mitocode.util.MongodbVsElasticSearchTimeComparer;
 
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.data.domain.Slice;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.sql.Date;
@@ -48,6 +48,18 @@ public class TestController {
 		Slice<Accident> accidents = accidentService.accidentsBetweenTwoDates(startDate, endDate, pageNumber, pageSize);
 		return accidents;
 	}
+	
+	// El anterior otra vez pero usando la implementacion de ELASTIC SEARCH
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/accidentsBetweenTwoDatesElasticVersion")
+	public Slice<Accident> accidentsBetweenTwoDatesElasticVersion(
+			@RequestParam(value = "startDate", required=true) Date startDate,
+			@RequestParam(value = "endDate", required=true) Date endDate,
+			@RequestParam(value = "pageNumber", required=true) int pageNumber,
+			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
+		Slice<Accident> accidents = accidentService.accidentsBetweenTwoDatesElasticVersion(startDate, endDate, pageNumber, pageSize);
+		return accidents;
+	}
 
 	// Determinar las condiciones más comunes en los accidentes (hora del día, condiciones climáticas, etc)
 	@ResponseStatus(HttpStatus.OK)
@@ -65,9 +77,19 @@ public class TestController {
 			@RequestParam(value = "radius", required=true) int radius,
 			@RequestParam(value = "pageNumber", required=true) int pageNumber,
 			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
-		Double[] point = { longitude, latitude };
-		Slice<Accident> accidents = accidentService.accidentsNearAPointAndARadius(point, radius*1000, pageNumber, pageSize); // El "*1000" es para que el radio sea tomado como kilometros
-		return accidents;
+		return accidentService.accidentsNearAPointAndARadius(latitude, longitude, radius, pageNumber, pageSize); 
+	}
+	
+	// El anterior otra vez pero usando la implementacion de ELASTIC SEARCH
+	@ResponseStatus(HttpStatus.OK)
+	@GetMapping("/accidentsNearAPointInARadiusElasticVersion")
+	public Slice<Accident> accidentsNearAPointInARadiusElasticVersion(
+			@RequestParam(value = "longitude", required = true) Double longitude,
+			@RequestParam(value = "latitude", required = true) Double latitude,
+			@RequestParam(value = "radius", required=true) int radius,
+			@RequestParam(value = "pageNumber", required=true) int pageNumber,
+			@RequestParam(value = "pageSize", required=true) int pageSize) throws ParseException {
+		return accidentService.accidentsNearAPointAndARadiusElasticVersion(latitude, longitude, radius, pageNumber, pageSize); 
 	}
 
 	// Obtener la distancia promedio desde el inicio al fin del accidente
@@ -81,13 +103,12 @@ public class TestController {
 	@ResponseStatus(HttpStatus.OK)
 	@GetMapping("/fiveMostDangerousPoints")
     public List<LocationAndAmountSchema> fiveMostDangerousPoints(
-            @RequestParam(required = true) String longitude,
-            @RequestParam(required = true) String latitude,
+            @RequestParam(required = true) Double longitude,
+            @RequestParam(required = true) Double latitude,
             @RequestParam(required = true) int radius) throws ParseException {
-        Double[] point = { Double.parseDouble(longitude), Double.parseDouble(latitude) };
-        List<LocationAndAmountSchema> points = this.accidentService.fiveMostDangerousPoints(point, radius * 1000); // El "*1000" es para que el radio sea tomado como kilometros
+        List<LocationAndAmountSchema> points = this.accidentService.fiveMostDangerousPoints(latitude, longitude, radius); 
         return points;
-      }
+	}
 	
 	// Devolver la distancia promedio que existe entre cada accidente y los 10 más cercanos.
 	@ResponseStatus(HttpStatus.OK)
@@ -107,16 +128,15 @@ public class TestController {
 		List<String> topFive = accidentService.fiveStreetsWithMoreAccidents();
 		return topFive;
 	}
-
+	
+	
+	// ENDPOINT EXTRA: Añadido para comparar el tiempo que tardan las consultas de MongoDb
+	// respecto a sus homonimas en ElasticSearch, los resultados se muestran en la consola.
 	@ResponseStatus(HttpStatus.OK)
-	@GetMapping("/elasticTest")
-	public Page<Accident> findAll(
-			@RequestParam(required = true) String country,
-			@RequestParam(required=true) int pageNumber,
-			@RequestParam(required=true) int pageSize) throws ParseException {
-		//Page<Accident> accidents = accidentService.findByCountry(country, pageNumber, pageSize);
-		return accidentService.test(pageNumber, pageSize);
-		//return accidentService.findByCountry(country, pageNumber, pageSize);
+	@GetMapping("/mongoVsElasticTimeCompare")
+	public void mongoVsElasticTimeCompare(
+			@RequestParam(value = "N", required=true) int N) {
+		MongodbVsElasticSearchTimeComparer.timeCompare(accidentService, N);
 	}
 		
 }

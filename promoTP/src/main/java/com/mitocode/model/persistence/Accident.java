@@ -6,112 +6,161 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.data.mongodb.core.mapping.Field;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Entity
 @Table(name = "accident")
-@Document(indexName = "accidents")
+@Document(indexName = "accident")
 public class Accident {
 
     @Id
     //@Column(name = "ID")
     private String id;
     @Field("Source")
+    @org.springframework.data.elasticsearch.annotations.Field("source")
     private String source;
     @Field("TMC")
+    @org.springframework.data.elasticsearch.annotations.Field("tcm")
     private Float tmc;
     @Field("Severity")
+    @org.springframework.data.elasticsearch.annotations.Field("severity")
     private Integer severity;
     @Field("Start_Time")
+    @org.springframework.data.elasticsearch.annotations.Field("start_time")
     private String startTime;
     @Field("End_Time")
+    @org.springframework.data.elasticsearch.annotations.Field("end_time")
     private String endTime;
     @Field("Start_Lat")
+    @org.springframework.data.elasticsearch.annotations.Field("start_lat")
     private Float startLat;
     @Field("Start_Lng")
+    @org.springframework.data.elasticsearch.annotations.Field("start_lng")
     private Float startLng;
     @Field("End_Lat")
+    @org.springframework.data.elasticsearch.annotations.Field("end_lat")
     private Float endLat;
     @Field("End_Lng")
+    @org.springframework.data.elasticsearch.annotations.Field("end_lng")
     private Float endLng;
     @Field("Distance(mi)")
+    @org.springframework.data.elasticsearch.annotations.Field("distance_mi")
     private Float distanceMi;
     @Field("Description")
+    @org.springframework.data.elasticsearch.annotations.Field("description")
     private String description;
     @Field("Number")
+    @org.springframework.data.elasticsearch.annotations.Field("number")
     private Float number;
     @Field("Street")
+    @org.springframework.data.elasticsearch.annotations.Field(value = "street", type = FieldType.Text, fielddata = true)
     private String street;
     @Field("Side")
+    @org.springframework.data.elasticsearch.annotations.Field("side")
     private char side;
     @Field("City")
+    @org.springframework.data.elasticsearch.annotations.Field("city")
     private String city;
     @Field("County")
+    @org.springframework.data.elasticsearch.annotations.Field("county")
     private String county;
     @Field("State")
+    @org.springframework.data.elasticsearch.annotations.Field("state")
     private String state;
     @Field("Zipcode")
+    @org.springframework.data.elasticsearch.annotations.Field("zipcode")
     private String zipcode;
     @Field("Country")
+    @org.springframework.data.elasticsearch.annotations.Field("country")
     private String country;
     @Field("Timezone")
+    @org.springframework.data.elasticsearch.annotations.Field("timezone")
     private String timezone;
     @Field("Airport_Code")
+    @org.springframework.data.elasticsearch.annotations.Field("airport_code")
     private String airportCode;
     @Field("Weather_Timestamp")
+    @org.springframework.data.elasticsearch.annotations.Field("weather_timestamp")
     private String weatherTimestamp;
     @Field("Temperature(F)")
+    @org.springframework.data.elasticsearch.annotations.Field("temperature_f")
     @Column(name = "temperature_f")
     private Float temperatureF;
     @Field("Wind_Chill(F)")
+    @org.springframework.data.elasticsearch.annotations.Field("wind_chill_f")
     @Column(name = "wind_chill_f")
     private String windChillF;
     @Field("Humidity(%)")
+    @org.springframework.data.elasticsearch.annotations.Field("humidity")
     private String humidity;
     @Field("Pressure(in)")
+    @org.springframework.data.elasticsearch.annotations.Field("pressure_in")
     private String pressureIn;
     @Field("Visibility(mi)")
+    @org.springframework.data.elasticsearch.annotations.Field("visibility_mi")
     private Float visibilityMi;
     @Field("Wind_Direction")
+    @org.springframework.data.elasticsearch.annotations.Field("wind_direction")
     private String windDirection;
     @Field("Wind_Speed(mph)")
+    @org.springframework.data.elasticsearch.annotations.Field("wind_speed_mph")
     private Float windSpeedMph;
     @Field("Precipitation(in)")
+    @org.springframework.data.elasticsearch.annotations.Field("precipitation_in")
     private Float precipitationIn;
     @Field("Weather_Condition")
+    @org.springframework.data.elasticsearch.annotations.Field("weather_condition")
     private String weatherCondition;
     @Field("Amenity")
+    @org.springframework.data.elasticsearch.annotations.Field("amenity")
     private Boolean amenity;
     @Field("Bump")
+    @org.springframework.data.elasticsearch.annotations.Field("bump")
     private Boolean bump;
     @Field("Crossing")
+    @org.springframework.data.elasticsearch.annotations.Field("crossing")
     private Boolean crossing;
     @Field("Give_Way")
+    @org.springframework.data.elasticsearch.annotations.Field("give_way")
     private Boolean giveWay;
     @Field("Junction")
+    @org.springframework.data.elasticsearch.annotations.Field("junction")
     private Boolean junction;
     @Field("No_Exit")
+    @org.springframework.data.elasticsearch.annotations.Field("no_exit")
     private Boolean noExit;
     @Field("Railway")
+    @org.springframework.data.elasticsearch.annotations.Field("railway")
     private Boolean railway;
     @Field("Roundabout")
+    @org.springframework.data.elasticsearch.annotations.Field("roundabout")
     private Boolean roundabout;
     @Field("Station")
+    @org.springframework.data.elasticsearch.annotations.Field("station")
     private Boolean station;
     @Field("Stop")
+    @org.springframework.data.elasticsearch.annotations.Field("stop")
     private Boolean stop;
     @Field("Traffic_Calming")
+    @org.springframework.data.elasticsearch.annotations.Field("traffic_calming")
     private Boolean trafficCalming;
     @Field("Traffic_Signal")
+    @org.springframework.data.elasticsearch.annotations.Field("traffic_signal")
     private Boolean trafficSignal;
     @Field("Turning_Loop")
+    @org.springframework.data.elasticsearch.annotations.Field("turning_loop")
     private Boolean turningLoop;
     @Field("Sunrise_Sunset")
+    @org.springframework.data.elasticsearch.annotations.Field("sunrise_sunset")
     private String sunriseSunset;
     @Field("Civil_Twilight")
+    @org.springframework.data.elasticsearch.annotations.Field("civil_twilight")
     private String civilTwilight;
     @Field("Nautical_Twilight")
+    @org.springframework.data.elasticsearch.annotations.Field("nautical_twilight")
     private String nauticalTwilight;
     @Field("Astronomical_Twilight")
+    @org.springframework.data.elasticsearch.annotations.Field("astronomical_twilight")
     private String astronomicalTwilight;
 
     public Accident(){

@@ -4,6 +4,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 
@@ -14,19 +15,28 @@ import com.mitocode.model.schema.AccidentWithDistanceSchema;
 import com.mitocode.model.schema.LocationAndAmountSchema;
 
 @Repository
-public interface IMongoAccidentRepo extends MongoRepository<Accident, String> {
+public interface MongodbAccidentRepository extends MongoRepository<Accident, String> {
 	
-	@Query("{location:{$near:{$geometry:{type:'Point',coordinates:?0},$maxDistance: ?1, $minDistance:0}}}")
-    Slice<Accident> accidentsNearAPointInARadius(Double[] point, int radius, Pageable pageable);
+	@Query("{\r\n"
+			+ "    Start_Time: {\r\n"
+			+ "        $gte: \"?0\",\r\n"
+			+ "        $lt: \"?1\"\r\n"
+			+ "    }\r\n"
+			+ "}")
+    Page<Accident> findByStartTimeBetween(String startDate, String endDate, Pageable pageable);
+	
+	// Por alguna razon es imposible hacer que esta consulta funcione si el tipo es page, cuando dentro del radio entra cierta cantidad de puntos, por lo que va a quedar con slice
+	@Query("{location:{ $near:{ $geometry:{ type:'Point', coordinates: [ ?1, ?0] }, $maxDistance: ?2 }}}")
+    Slice<Accident> accidentsNearAPointInARadius(Double lat, Double lng, int radius, Pageable pageable);
 	
 	@Aggregation(pipeline = {
-            "{$geoNear: {near: { type: 'Point', coordinates: ?0 },distanceField: 'dist.calculated', maxDistance: ?1, spherical: true}}",
+            "{$geoNear: {near: { type: 'Point', coordinates: [ ?1, ?0] },distanceField: 'dist.calculated', maxDistance: ?2, spherical: true}}",
             "{$group : {_id: '$location', amount: {$sum: 1}}}",
             "{$sort: {amount:-1}}",
             "{$limit : 5}",
             "{$project: { '_id': 0, 'location':'$_id.coordinates', 'amount':'$amount'}}"
     })
-    List<LocationAndAmountSchema> fiveMostDangerousPoints(Double[] point, int radius);
+    List<LocationAndAmountSchema> fiveMostDangerousPoints(Double lat, Double lng, int radius);
 	
     @Aggregation(pipeline = {
             "{ $geoNear: { near: { type: 'Point', coordinates: ?1 }, distanceField: 'distance', spherical: true } }",

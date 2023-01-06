@@ -49,6 +49,38 @@ CREATE TABLE IF NOT EXISTS accident (
     nautical_twilight VARCHAR(10),
     astronomical_twilight VARCHAR(10)
 );
+
+create index I_start_time on accident(start_time);
+create index I_end_time on accident(end_time);
+create index I_distance_mi on accident(distance_mi);
+create index I_street on accident(street);
+create index I_temperature_f on accident(temperature_f);
+create index I_wind_chill_f on accident(wind_chill_f);
+create index I_humidity on accident(humidity);
+create index I_pressure_in on accident(pressure_in);
+create index I_visibility_mi on accident(visibility_mi);
+create index I_wind_direction on accident(wind_direction);
+create index I_wind_speed_mph on accident(wind_speed_mph);
+create index I_precipitation_in on accident(precipitation_in);
+create index I_weather_condition on accident(weather_condition);
+create index I_amenity on accident(amenity);
+create index I_bump on accident(bump);
+create index I_crossing on accident(crossing);
+create index I_give_way on accident(give_way);
+create index I_junction on accident(junction);
+create index I_no_exit on accident(no_exit);
+create index I_railway on accident(railway);
+create index I_roundabout on accident(roundabout);
+create index I_station on accident(station);
+create index I_stop on accident(stop);
+create index I_traffic_calming on accident(traffic_calming);
+create index I_traffic_signal on accident(traffic_signal);
+create index I_turning_loop on accident(turning_loop);
+create index I_sunrise_sunset on accident(sunrise_sunset);
+create index I_civil_twilight on accident(civil_twilight);
+create index I_nautical_twilight on accident(nautical_twilight);
+create index I_astronomical_twilight on accident(astronomical_twilight);
+
 COPY accident(id,source,tmc,severity,start_time,end_time,start_lat,start_lng,end_lat,end_lng,distance_mi,description,number,street,side,city,county,state,zipcode,country,timezone,airport_code,weather_timestamp,temperature_f,wind_chill_f,humidity,pressure_in,visibility_mi,wind_direction,wind_speed_mph,precipitation_in,weather_condition,amenity,bump,crossing,give_way,junction,no_exit,railway,roundabout,station,stop,traffic_calming,traffic_signal,turning_loop,sunrise_sunset,civil_twilight,nautical_twilight,astronomical_twilight)
 FROM '/csv/US_Accidents_Dec19.csv'
 DELIMITER ','

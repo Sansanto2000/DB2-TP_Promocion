@@ -8,4 +8,5 @@ db.accident.updateMany({}, [
     },
 ]);
 db.accident.createIndex({ location: "2dsphere" });
+db.accident.createIndex({ Start_Time: 1 });
 print('END #################################################################');
