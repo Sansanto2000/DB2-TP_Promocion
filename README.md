@@ -15,7 +15,7 @@
 ## Puesta a punto
 
 1. En una primera instancia lo primero que se debe hacer es importar el presente repositorio en una carpeta local.
-2. Vaya a /docker y cree una carpeta llamada "csv" y copie en ella el archivo donde tiene los accidentes que se cargarán en las DBs. Es importante que se llame “US_Accidents_Dec19.csv” si no tiene ese nombre debe asignarcelo.
+2. Vaya a /docker, cree una carpeta llamada "csv" y pege en ella el archivo donde tiene los accidentes a cargar en las DBs. Es importante que se llame “US_Accidents_Dec19.csv” si no tiene ese nombre debe asignarcelo.
 3. Una vez hecho esto debe abrir un símbolo del sistema (cmd), posicionarse sobre la carpeta donde importo el repositorio y avance a la carpeta "docker".
 ```
 cd (Path de la carpeta donde importo el repositorio)/docker
