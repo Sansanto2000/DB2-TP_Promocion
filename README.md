@@ -10,7 +10,7 @@
 
 ## Recomendaciones
 
-- La primera mitad del proyecto la desarrollamos utilizando el idle "Intellij Idea" pero hubo constantes problemas debido a que las importaciones no se hacian de forma automática y el Idle no verificaba los errores del código, por lo que en un determinado punto nos pasamos a "Eclipse-JavaEnterpriseEdition" con el cual si bien tuvimos ciertas complicaciones iniciales logramos que funcione satisfactoriamente para el desarrollo del proyecto. Es de descarga gratuita desde la página de eclipse, se descarga el instalador genérico y al ejecutarlo se le ofrece entre varias versiones, entre las que está "Java EE IDE" el cual es el que interesa, el mismo tiene un icono similar a un engranaje. Los pasos a seguir en este documento se escribieron teniendo en cuenta a este último.
+- La primera mitad del proyecto la desarrollamos utilizando el idle "Intellij Idea" pero hubo constantes problemas debido a que las importaciones no se hacian de forma automática y el Idle no verificaba los errores del código, por lo que en un determinado punto nos pasamos a "Eclipse-JavaEnterpriseEdition" con el cual si bien tuvimos ciertas complicaciones iniciales logramos que funcione satisfactoriamente para el desarrollo del proyecto. Es de descarga gratuita desde la página de eclipse, se descarga el instalador genérico y al ejecutarlo se le ofrece entre varias versiones, entre las que está "Java EE IDE" la cual es la que interesa, el mismo tiene un icono similar a un engranaje. Los pasos a seguir en este documento se escribieron teniendo en cuenta a este último.
 
 ## Puesta a punto
 
