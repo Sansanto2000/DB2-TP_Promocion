@@ -22,12 +22,12 @@ cd (Path de la carpeta donde importo el repositorio)/docker
 ```
 4. Notará la existencia de un archivo llamado "docker-compose.yml", en este se halla la especificación de los contenedores que representan las BDs que se usarán. Interesa levantar 5 de los 6 servicios que en este se especifican, ya que el servicio identificado como Logstash se corresponde con un cargador de datos para la DB ElasticSearch que se usará mas adelante. 
 Para efectivamente levantar los contenedores de interés valla al símbolo del sistema del paso anterior y ejecute la siguiente secuencia de comandos.
-> IMPORTANTE: Deben ejecutarse lo mas seguidas posibles, cada una ni bien termine de ejecutarse la anterior (si uno tiene varias líneas copiadas en el portapapeles al pegarlas en una consola estas se suelen ejecutar automáticamente de forma seguida). En caso de que en un intento no logre ejecutarlo de forma seguida (pasaron por lo menos 5 segundos entre que termino un comando y comenzo el que sigue) entonces es importante de que antes de intentarlo otra vez borre los contenedores y volúmenes docker que se crearon, en caso de no hacerlo es probable que la aplicación cargue mal los datos en las DBs.
 ```
 docker-compose up -d
 docker-compose stop Logstash
 cd .
 ```
+> IMPORTANTE: Deben ejecutarse lo mas seguidas posibles, cada una ni bien termine de ejecutarse la anterior (si uno tiene varias líneas copiadas en el portapapeles al pegarlas en una consola estas se suelen ejecutar automáticamente de forma seguida). En caso de que en un intento no logre ejecutarlo de forma seguida (pasaron por lo menos 5 segundos entre que termino un comando y comenzo el que sigue) entonces es importante de que antes de intentarlo otra vez borre los contenedores y volúmenes docker que se crearon, en caso de no hacerlo es probable que la aplicación cargue mal los datos en las DBs.
 3. Pasados varios segundos (30s-60s) para que los contenedores tengan tiempo de inicializarse correctamente, hay que configurar algunos ciertos aspectos en ElasticSearch, para ello puede usar Kibana. Desde el navegador ingrese a http://localhost:5601/app/dev_tools#/console y en la consola emergente ejecute las siguientes líneas:
 ```
 PUT /accident
